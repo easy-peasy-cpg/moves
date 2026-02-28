@@ -47,17 +47,21 @@ export function useMoves(seasonId, userId) {
   }, [fetchMoves])
 
   const completeMove = useCallback(
-    async (draftedMoveId, photoUrl, story) => {
+    async (draftedMoveId, photoUrl, story, collabPartnerId) => {
       try {
         // Update the drafted move as completed
+        const updateFields = {
+          is_completed: true,
+          completed_at: new Date().toISOString(),
+          completion_photo_url: photoUrl || null,
+          completion_story: story || null,
+        }
+        if (collabPartnerId) {
+          updateFields.collab_partner_id = collabPartnerId
+        }
         const { error: updateError } = await supabase
           .from('moves_drafted')
-          .update({
-            is_completed: true,
-            completed_at: new Date().toISOString(),
-            completion_photo_url: photoUrl || null,
-            completion_story: story || null,
-          })
+          .update(updateFields)
           .eq('id', draftedMoveId)
 
         if (updateError) throw updateError

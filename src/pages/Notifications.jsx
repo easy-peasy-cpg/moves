@@ -6,9 +6,7 @@ import Button from '../components/ui/Button'
 import EmptyState from '../components/ui/EmptyState'
 
 function getNotificationRoute(notification) {
-  const { type, metadata } = notification
-  const seasonId = metadata?.season_id
-  const feedPostId = metadata?.feed_post_id
+  const { type, season_id: seasonId } = notification
 
   switch (type) {
     case 'season_invite':

@@ -96,7 +96,7 @@ export default function SeasonDashboard() {
   async function handleCompleteMove({ photoUrl, story, collabPartnerId }) {
     if (!completeModalMove) return
     try {
-      await completeMove(completeModalMove.id, photoUrl, story)
+      await completeMove(completeModalMove.id, photoUrl, story, collabPartnerId)
       toast({ message: 'Move completed! Nice work.', type: 'success' })
       setCompleteModalMove(null)
       refetchMoves()

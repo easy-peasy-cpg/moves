@@ -32,12 +32,9 @@ export default function NudgeButton({ seasonId, receiverId, draftedMoveId, moveT
           user_id: receiverId,
           actor_id: user.id,
           type: 'nudge',
+          season_id: seasonId,
+          reference_id: draftedMoveId,
           message: `nudged you about "${moveTitle}"`,
-          metadata: {
-            season_id: seasonId,
-            drafted_move_id: draftedMoveId,
-            move_title: moveTitle,
-          },
         })
 
       if (notifError) {
