@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useAuth } from '../lib/auth'
+import { supabase } from '../lib/supabase'
 import { useSeason } from '../hooks/useSeason'
 import { useMoves } from '../hooks/useMoves'
 import { useFeed } from '../hooks/useFeed'
@@ -71,7 +72,7 @@ export default function SeasonDashboard() {
 
     setLoadingMemberMoves((prev) => ({ ...prev, [memberId]: true }))
     try {
-      const { supabase } = await import('../lib/supabase')
+      // supabase already imported at top level
       const { data, error } = await supabase
         .from('drafted_moves')
         .select(`
