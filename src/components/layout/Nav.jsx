@@ -60,13 +60,13 @@ export default function Nav() {
                 <button
                   key={season.id}
                   onClick={() => {
-                    navigate(`/season/${season.id}`)
+                    navigate(`/seasons/${season.id}`)
                     setSeasonDropdownOpen(false)
                   }}
                   className="w-full text-left px-4 py-2.5 hover:bg-cream transition-colors"
                 >
                   <span className="font-body text-sm font-medium text-charcoal block">{season.name}</span>
-                  <span className="font-body text-xs text-warm-gray">{season.status}</span>
+                  <span className="font-body text-xs text-warm-gray">{season.draft_status || 'active'}</span>
                 </button>
               ))
             ) : (
@@ -80,7 +80,7 @@ export default function Nav() {
       <div className="flex items-center gap-4">
         {/* Start a Season */}
         <button
-          onClick={() => navigate('/season/create')}
+          onClick={() => navigate('/seasons/new')}
           className="bg-sky-blue text-white font-body text-sm font-medium px-4 py-1.5 rounded-lg hover:opacity-90 transition-opacity"
         >
           Start a Season

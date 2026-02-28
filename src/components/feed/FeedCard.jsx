@@ -61,10 +61,10 @@ export default function FeedCard({ post, onAddComment }) {
       </div>
 
       {/* Photo */}
-      {post.photo_url && (
+      {draftedMove.completion_photo_url && (
         <div className="px-4 pb-3">
           <img
-            src={post.photo_url}
+            src={draftedMove.completion_photo_url}
             alt={movePool.title || 'Move completion'}
             className="w-full rounded-xl object-cover max-h-96"
           />
@@ -81,10 +81,10 @@ export default function FeedCard({ post, onAddComment }) {
       )}
 
       {/* Story / Caption */}
-      {post.caption && (
+      {draftedMove.completion_story && (
         <div className="px-4 pb-3">
           <p className="font-body text-sm text-charcoal leading-relaxed">
-            {post.caption}
+            {draftedMove.completion_story}
           </p>
         </div>
       )}

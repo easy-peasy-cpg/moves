@@ -247,8 +247,8 @@ export default function UserProfile() {
                       {new Date(season.end_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                     </p>
                   </div>
-                  <Badge variant={season.status === 'active' ? 'success' : 'default'}>
-                    {season.status === 'active' ? 'Active' : season.status === 'completed' ? 'Ended' : season.status}
+                  <Badge variant={season.draft_status === 'active' ? 'success' : 'default'}>
+                    {season.draft_status === 'active' ? 'Active' : season.draft_status === 'completed' ? 'Ended' : season.draft_status}
                   </Badge>
                 </div>
               </Card>

@@ -1,5 +1,7 @@
+import { useState, useEffect } from 'react'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useAuth } from './lib/auth'
+import { supabase } from './lib/supabase'
 import Nav from './components/layout/Nav'
 import BottomTabs from './components/layout/BottomTabs'
 import Landing from './pages/Landing'
@@ -249,5 +251,3 @@ function useSeasonsQuick() {
   return { seasons, loading }
 }
 
-import { useState, useEffect } from 'react'
-import { supabase } from './lib/supabase'

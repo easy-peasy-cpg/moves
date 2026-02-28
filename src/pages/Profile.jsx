@@ -18,7 +18,7 @@ export default function Profile() {
   const displayProfile = profile || authProfile
 
   const activeSeasons = (seasons || []).filter(
-    (s) => s.status === 'active' || s.status === 'drafting' || s.draft_status === 'completed'
+    (s) => s.draft_status === 'active' || s.draft_status === 'drafting' || s.draft_status === 'completed'
   )
 
   if (loading) {
@@ -137,8 +137,8 @@ export default function Profile() {
                         {new Date(season.end_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                       </p>
                     </div>
-                    <Badge variant={season.status === 'active' ? 'success' : 'accent'}>
-                      {season.status === 'active' ? 'Active' : season.status === 'drafting' ? 'Drafting' : season.status}
+                    <Badge variant={season.draft_status === 'active' ? 'success' : 'accent'}>
+                      {season.draft_status === 'active' ? 'Active' : season.draft_status === 'drafting' ? 'Drafting' : season.draft_status}
                     </Badge>
                   </div>
                 </Card>

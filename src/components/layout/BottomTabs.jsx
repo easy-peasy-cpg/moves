@@ -3,7 +3,7 @@ import { useNotifications } from '../../hooks/useNotifications'
 
 const tabs = [
   {
-    to: '/home',
+    to: '/dashboard',
     label: 'Home',
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -12,7 +12,7 @@ const tabs = [
     ),
   },
   {
-    to: '/feed',
+    to: '/dashboard',
     label: 'Feed',
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -21,7 +21,7 @@ const tabs = [
     ),
   },
   {
-    to: '/create',
+    to: '/seasons/new',
     label: 'Create',
     isCenter: true,
     icon: (
@@ -61,7 +61,7 @@ export default function BottomTabs() {
           if (tab.isCenter) {
             return (
               <NavLink
-                key={tab.to}
+                key={tab.label}
                 to={tab.to}
                 className="flex flex-col items-center justify-center -mt-4"
               >
@@ -74,7 +74,7 @@ export default function BottomTabs() {
 
           return (
             <NavLink
-              key={tab.to}
+              key={tab.label}
               to={tab.to}
               className={({ isActive }) =>
                 `flex flex-col items-center justify-center gap-0.5 pt-1.5 ${
