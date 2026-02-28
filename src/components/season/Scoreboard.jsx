@@ -51,8 +51,8 @@ export default function Scoreboard({ members = [] }) {
 
             {/* Avatar */}
             <Avatar
-              src={member.avatar_url}
-              name={member.display_name || 'Player'}
+              src={member.profiles?.avatar_url || member.avatar_url}
+              name={member.profiles?.display_name || member.display_name || 'Player'}
               size="sm"
             />
 
@@ -60,7 +60,7 @@ export default function Scoreboard({ members = [] }) {
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
                 <span className="font-body text-sm font-semibold text-charcoal truncate">
-                  {member.display_name || 'Player'}
+                  {member.profiles?.display_name || member.display_name || 'Player'}
                 </span>
                 {isFirstMover && (
                   <Badge className="bg-sunset-gold/10 text-sunset-gold">

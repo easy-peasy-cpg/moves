@@ -228,22 +228,39 @@ export function useDraft(seasonId) {
         if (poolError) throw poolError
 
         // Calculate next drafter using snake logic
-        const { nextDrafterId, nextRound, nextPick } = getNextDrafter(
-          season.current_round || 1,
-          season.current_pick || 1,
-          members
-        )
+        const totalPicks = members.length * 20
+        const currentPickNum = season.current_pick || 1
 
-        // Update season with next drafter
-        const { error: seasonError } = await supabase
-          .from('moves_seasons')
-          .update({
-            current_drafter_id: nextDrafterId,
-            current_round: nextRound,
-            current_pick: nextPick,
-          })
-          .eq('id', seasonId)
-        if (seasonError) throw seasonError
+        if (currentPickNum >= totalPicks) {
+          // Draft is complete
+          const { error: seasonError } = await supabase
+            .from('moves_seasons')
+            .update({
+              draft_status: 'completed',
+              current_drafter_id: null,
+              current_round: 20,
+              current_pick: totalPicks,
+            })
+            .eq('id', seasonId)
+          if (seasonError) throw seasonError
+        } else {
+          const { nextDrafterId, nextRound, nextPick } = getNextDrafter(
+            season.current_round || 1,
+            season.current_pick || 1,
+            members
+          )
+
+          // Update season with next drafter
+          const { error: seasonError } = await supabase
+            .from('moves_seasons')
+            .update({
+              current_drafter_id: nextDrafterId,
+              current_round: nextRound,
+              current_pick: nextPick,
+            })
+            .eq('id', seasonId)
+          if (seasonError) throw seasonError
+        }
       } catch (err) {
         console.error('Error making pick:', err)
         throw err

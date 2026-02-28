@@ -67,12 +67,25 @@ export function useMoves(seasonId, userId) {
           season_id: seasonId,
           user_id: userId,
           drafted_move_id: draftedMoveId,
-          photo_url: photoUrl || null,
-          caption: story || null,
-          post_type: 'completion',
         })
 
-        if (feedError) throw feedError
+        if (feedError) console.error('Feed post error (non-blocking):', feedError)
+
+        // Increment moves_completed on the season member
+        const { data: memberData } = await supabase
+          .from('moves_season_members')
+          .select('moves_completed')
+          .eq('season_id', seasonId)
+          .eq('user_id', userId)
+          .single()
+
+        if (memberData) {
+          await supabase
+            .from('moves_season_members')
+            .update({ moves_completed: (memberData.moves_completed || 0) + 1 })
+            .eq('season_id', seasonId)
+            .eq('user_id', userId)
+        }
 
         // Refetch moves to update state
         await fetchMoves()

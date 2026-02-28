@@ -87,12 +87,13 @@ export function AuthProvider({ children }) {
 
       const newUser = data.user
       if (newUser) {
+        const generatedUsername = email.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g, '') + Math.floor(Math.random() * 1000)
         const { error: profileError } = await supabase
           .from('profiles')
           .insert({
             id: newUser.id,
-            username: username || null,
-            display_name: displayName || null,
+            username: username || generatedUsername,
+            display_name: displayName || email.split('@')[0],
             avatar_url: null,
             bio: null,
             city: city || null,
