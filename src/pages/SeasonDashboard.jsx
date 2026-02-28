@@ -124,7 +124,7 @@ export default function SeasonDashboard() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-6 space-y-8">
+    <div className="max-w-4xl mx-auto px-4 pt-20 pb-24 md:pb-8 space-y-8">
       {/* Header */}
       <div className="space-y-3">
         <div className="flex items-start justify-between flex-wrap gap-3">
@@ -138,6 +138,51 @@ export default function SeasonDashboard() {
             {remaining > 0 ? `${remaining} days left` : 'Season ended'}
           </Badge>
         </div>
+
+        {/* Draft Status Banner */}
+        {season.draft_status === 'pre_draft' && (
+          <Link
+            to={`/seasons/${seasonId}/pool`}
+            className="block bg-sunset-gold/10 border border-sunset-gold/30 rounded-xl px-5 py-4 hover:bg-sunset-gold/15 transition-colors"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-sunset-gold/20 flex items-center justify-center shrink-0">
+                <svg className="w-5 h-5 text-sunset-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+              </div>
+              <div>
+                <p className="font-body font-semibold text-charcoal text-sm">Build the Move Pool</p>
+                <p className="font-body text-xs text-warm-gray">Add moves for your crew to draft from.</p>
+              </div>
+              <svg className="w-5 h-5 text-warm-gray ml-auto shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </Link>
+        )}
+
+        {season.draft_status === 'drafting' && (
+          <Link
+            to={`/seasons/${seasonId}/draft`}
+            className="block bg-sky-blue/10 border border-sky-blue/30 rounded-xl px-5 py-4 hover:bg-sky-blue/15 transition-colors"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-sky-blue/20 flex items-center justify-center shrink-0">
+                <svg className="w-5 h-5 text-sky-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <div>
+                <p className="font-body font-semibold text-charcoal text-sm">The Draft is Live</p>
+                <p className="font-body text-xs text-warm-gray">Head to the draft board and make your picks.</p>
+              </div>
+              <svg className="w-5 h-5 text-warm-gray ml-auto shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </Link>
+        )}
 
         {/* Crew Avatars */}
         <div className="flex items-center -space-x-2">

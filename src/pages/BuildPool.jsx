@@ -116,7 +116,7 @@ export default function BuildPool() {
   }
 
   return (
-    <div className="min-h-screen bg-cream pb-32">
+    <div className="min-h-screen bg-cream pb-32 pt-16">
       {/* Header */}
       <div className="bg-warm-white border-b border-light-warm-gray px-4 py-5">
         <div className="max-w-2xl mx-auto">

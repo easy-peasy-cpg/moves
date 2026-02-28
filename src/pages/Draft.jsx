@@ -210,7 +210,7 @@ export default function Draft() {
   // ============================================================
   if (isPreDraft) {
     return (
-      <div className="min-h-screen bg-cream">
+      <div className="min-h-screen bg-cream pt-16">
         <div className="max-w-2xl mx-auto px-4 py-8">
           {/* Header */}
           <div className="text-center mb-10 animate-fade-up">
@@ -323,7 +323,7 @@ export default function Draft() {
     });
 
     return (
-      <div className="min-h-screen bg-cream">
+      <div className="min-h-screen bg-cream pt-16">
         <div className="max-w-4xl mx-auto px-4 py-8">
           {/* Celebration header */}
           <div className="text-center mb-10 animate-fade-up">
@@ -426,7 +426,7 @@ export default function Draft() {
   ];
 
   return (
-    <div className="min-h-screen bg-cream flex flex-col">
+    <div className="min-h-screen bg-cream flex flex-col pt-16">
       {/* Your turn banner (mobile + desktop) */}
       {isMyTurn && (
         <div className="bg-sunset-gold text-white py-2.5 px-4 text-center animate-slide-in">

@@ -178,7 +178,7 @@ export default function CreateSeason() {
   }
 
   return (
-    <div className="min-h-screen bg-cream px-4 py-8">
+    <div className="min-h-screen bg-cream px-4 pt-20 pb-24 md:pb-8">
       <div className="max-w-lg mx-auto">
         <StepIndicator currentStep={step} />
 

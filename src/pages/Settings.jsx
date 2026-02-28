@@ -84,11 +84,11 @@ export default function Settings() {
   return (
     <div className="min-h-screen bg-cream">
       {/* Page header */}
-      <div className="max-w-xl mx-auto px-4 pt-8 pb-6">
+      <div className="max-w-xl mx-auto px-4 pt-20 pb-6">
         <h1 className="font-display text-2xl text-charcoal">Settings</h1>
       </div>
 
-      <div className="max-w-xl mx-auto px-4 pb-12 space-y-6">
+      <div className="max-w-xl mx-auto px-4 pb-24 md:pb-12 space-y-6">
         {/* Edit Profile */}
         <Card className="p-6">
           <h2 className="font-display text-lg text-charcoal mb-4">Edit Profile</h2>

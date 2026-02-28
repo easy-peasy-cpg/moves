@@ -20,7 +20,7 @@ export default function Feed() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-6">
+    <div className="max-w-2xl mx-auto px-4 pt-20 pb-24 md:pb-8">
       {/* Header */}
       <div className="flex items-center gap-3 mb-6">
         <Link

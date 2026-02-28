@@ -40,7 +40,7 @@ export default function Profile() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-6 space-y-6">
+    <div className="max-w-2xl mx-auto px-4 pt-20 pb-24 md:pb-8 space-y-6">
       {/* Profile Header */}
       <div className="flex flex-col items-center text-center">
         <Avatar
