@@ -18,10 +18,10 @@ export function useMoves(seasonId, userId) {
       setError(null)
 
       const { data, error: fetchError } = await supabase
-        .from('drafted_moves')
+        .from('moves_drafted')
         .select(`
           *,
-          move_pool (
+          moves_pool (
             id,
             title,
             category,
@@ -51,7 +51,7 @@ export function useMoves(seasonId, userId) {
       try {
         // Update the drafted move as completed
         const { error: updateError } = await supabase
-          .from('drafted_moves')
+          .from('moves_drafted')
           .update({
             is_completed: true,
             completed_at: new Date().toISOString(),
@@ -63,7 +63,7 @@ export function useMoves(seasonId, userId) {
         if (updateError) throw updateError
 
         // Create a feed post for the completion
-        const { error: feedError } = await supabase.from('feed_posts').insert({
+        const { error: feedError } = await supabase.from('moves_feed_posts').insert({
           season_id: seasonId,
           user_id: userId,
           drafted_move_id: draftedMoveId,

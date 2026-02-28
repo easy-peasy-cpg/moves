@@ -23,7 +23,7 @@ export function useNotifications() {
       setLoading(true)
 
       const { data, error } = await supabase
-        .from('notifications')
+        .from('moves_notifications')
         .select(`
           *,
           profiles:actor_id (
@@ -60,7 +60,7 @@ export function useNotifications() {
         {
           event: '*',
           schema: 'public',
-          table: 'notifications',
+          table: 'moves_notifications',
           filter: `user_id=eq.${user.id}`,
         },
         () => {
@@ -78,7 +78,7 @@ export function useNotifications() {
     async (id) => {
       try {
         const { error } = await supabase
-          .from('notifications')
+          .from('moves_notifications')
           .update({ is_read: true })
           .eq('id', id)
 
@@ -99,7 +99,7 @@ export function useNotifications() {
 
     try {
       const { error } = await supabase
-        .from('notifications')
+        .from('moves_notifications')
         .update({ is_read: true })
         .eq('user_id', user.id)
         .eq('is_read', false)

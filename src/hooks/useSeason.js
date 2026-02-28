@@ -18,7 +18,7 @@ export function useSeason(seasonId) {
       setError(null)
 
       const { data: seasonData, error: seasonError } = await supabase
-        .from('seasons')
+        .from('moves_seasons')
         .select('*')
         .eq('id', seasonId)
         .single()
@@ -27,7 +27,7 @@ export function useSeason(seasonId) {
       setSeason(seasonData)
 
       const { data: membersData, error: membersError } = await supabase
-        .from('season_members')
+        .from('moves_season_members')
         .select(`
           *,
           profiles (
@@ -67,7 +67,7 @@ export function useSeason(seasonId) {
         {
           event: '*',
           schema: 'public',
-          table: 'seasons',
+          table: 'moves_seasons',
           filter: `id=eq.${seasonId}`,
         },
         (payload) => {

@@ -25,7 +25,7 @@ export function useDraft(seasonId) {
 
       // Fetch season
       const { data: seasonData, error: seasonError } = await supabase
-        .from('seasons')
+        .from('moves_seasons')
         .select('*')
         .eq('id', seasonId)
         .single()
@@ -34,7 +34,7 @@ export function useDraft(seasonId) {
 
       // Fetch members with profiles
       const { data: membersData, error: membersError } = await supabase
-        .from('season_members')
+        .from('moves_season_members')
         .select(`
           *,
           profiles (
@@ -51,7 +51,7 @@ export function useDraft(seasonId) {
 
       // Fetch move pool
       const { data: poolData, error: poolError } = await supabase
-        .from('move_pool')
+        .from('moves_pool')
         .select('*')
         .eq('season_id', seasonId)
       if (poolError) throw poolError
@@ -59,10 +59,10 @@ export function useDraft(seasonId) {
 
       // Fetch drafted moves
       const { data: draftedData, error: draftedError } = await supabase
-        .from('drafted_moves')
+        .from('moves_drafted')
         .select(`
           *,
-          move_pool (
+          moves_pool (
             id,
             title,
             category,
@@ -95,7 +95,7 @@ export function useDraft(seasonId) {
         {
           event: 'UPDATE',
           schema: 'public',
-          table: 'seasons',
+          table: 'moves_seasons',
           filter: `id=eq.${seasonId}`,
         },
         (payload) => {
@@ -107,13 +107,13 @@ export function useDraft(seasonId) {
         {
           event: '*',
           schema: 'public',
-          table: 'move_pool',
+          table: 'moves_pool',
           filter: `season_id=eq.${seasonId}`,
         },
         () => {
           // Refetch pool on any change
           supabase
-            .from('move_pool')
+            .from('moves_pool')
             .select('*')
             .eq('season_id', seasonId)
             .then(({ data }) => {
@@ -126,16 +126,16 @@ export function useDraft(seasonId) {
         {
           event: 'INSERT',
           schema: 'public',
-          table: 'drafted_moves',
+          table: 'moves_drafted',
           filter: `season_id=eq.${seasonId}`,
         },
         () => {
           // Refetch drafted moves on new pick
           supabase
-            .from('drafted_moves')
+            .from('moves_drafted')
             .select(`
               *,
-              move_pool (
+              moves_pool (
                 id,
                 title,
                 category,
@@ -206,7 +206,7 @@ export function useDraft(seasonId) {
 
       try {
         // Insert drafted move
-        const { error: insertError } = await supabase.from('drafted_moves').insert({
+        const { error: insertError } = await supabase.from('moves_drafted').insert({
           season_id: seasonId,
           user_id: user.id,
           move_pool_id: movePoolId,
@@ -217,7 +217,7 @@ export function useDraft(seasonId) {
 
         // Mark move as drafted in pool
         const { error: poolError } = await supabase
-          .from('move_pool')
+          .from('moves_pool')
           .update({
             is_drafted: true,
             drafted_by: user.id,
@@ -236,7 +236,7 @@ export function useDraft(seasonId) {
 
         // Update season with next drafter
         const { error: seasonError } = await supabase
-          .from('seasons')
+          .from('moves_seasons')
           .update({
             current_drafter_id: nextDrafterId,
             current_round: nextRound,
@@ -262,7 +262,7 @@ export function useDraft(seasonId) {
       // Update join_order for each member
       for (let i = 0; i < shuffled.length; i++) {
         const { error } = await supabase
-          .from('season_members')
+          .from('moves_season_members')
           .update({ join_order: i + 1 })
           .eq('id', shuffled[i].id)
         if (error) throw error
@@ -270,7 +270,7 @@ export function useDraft(seasonId) {
 
       // Set draft_status to drafting, set first drafter
       const { error: seasonError } = await supabase
-        .from('seasons')
+        .from('moves_seasons')
         .update({
           draft_status: 'drafting',
           current_drafter_id: shuffled[0].user_id,

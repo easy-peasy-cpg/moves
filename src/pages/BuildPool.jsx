@@ -95,7 +95,7 @@ export default function BuildPool() {
   async function handleStartDraft() {
     try {
       const { error } = await supabase
-        .from('seasons')
+        .from('moves_seasons')
         .update({ draft_status: 'drafting' })
         .eq('id', seasonId)
 

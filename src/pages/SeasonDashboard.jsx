@@ -74,10 +74,10 @@ export default function SeasonDashboard() {
     try {
       // supabase already imported at top level
       const { data, error } = await supabase
-        .from('drafted_moves')
+        .from('moves_drafted')
         .select(`
           *,
-          move_pool (id, title, category, description)
+          moves_pool (id, title, category, description)
         `)
         .eq('season_id', seasonId)
         .eq('user_id', memberId)
@@ -207,7 +207,7 @@ export default function SeasonDashboard() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {filteredMoves.map((move) => {
-              const pool = move.move_pool || {}
+              const pool = move.moves_pool || {}
               const isCompleted = move.is_completed
 
               return (
@@ -378,7 +378,7 @@ export default function SeasonDashboard() {
                     ) : (
                       <div className="space-y-2">
                         {theirMoves.map((move) => {
-                          const pool = move.move_pool || {}
+                          const pool = move.moves_pool || {}
                           return (
                             <div key={move.id} className="flex items-center justify-between gap-2 py-1.5">
                               <div className="flex items-center gap-2 min-w-0">

@@ -21,7 +21,7 @@ export function useSeasons() {
 
       // Get all season_ids the user is a member of
       const { data: memberRows, error: memberError } = await supabase
-        .from('season_members')
+        .from('moves_season_members')
         .select('season_id')
         .eq('user_id', user.id)
 
@@ -37,7 +37,7 @@ export function useSeasons() {
 
       // Fetch the actual season records
       const { data: seasonsData, error: seasonsError } = await supabase
-        .from('seasons')
+        .from('moves_seasons')
         .select('*')
         .in('id', seasonIds)
         .order('created_at', { ascending: false })

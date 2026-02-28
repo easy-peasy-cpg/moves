@@ -63,7 +63,7 @@ export default function UserProfile() {
       try {
         // Get their season memberships
         const { data: theirMembers, error: theirError } = await supabase
-          .from('season_members')
+          .from('moves_season_members')
           .select('season_id')
           .eq('user_id', userId)
 
@@ -72,7 +72,7 @@ export default function UserProfile() {
 
         if (theirSeasonIds.length > 0) {
           const { data: seasonsData, error: seasonsError } = await supabase
-            .from('seasons')
+            .from('moves_seasons')
             .select('*')
             .in('id', theirSeasonIds)
             .order('created_at', { ascending: false })
@@ -85,7 +85,7 @@ export default function UserProfile() {
         // Check for shared seasons with current user
         if (user && user.id !== userId) {
           const { data: myMembers, error: myError } = await supabase
-            .from('season_members')
+            .from('moves_season_members')
             .select('season_id')
             .eq('user_id', user.id)
 
@@ -95,7 +95,7 @@ export default function UserProfile() {
 
             if (shared.length > 0) {
               const { data: sharedData, error: sharedError } = await supabase
-                .from('seasons')
+                .from('moves_seasons')
                 .select('*')
                 .in('id', shared)
                 .order('created_at', { ascending: false })

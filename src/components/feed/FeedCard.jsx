@@ -21,9 +21,9 @@ export default function FeedCard({ post, onAddComment }) {
   const [showComments, setShowComments] = useState(false)
 
   const profile = post.profiles || {}
-  const draftedMove = post.drafted_moves || {}
-  const movePool = draftedMove.move_pool || {}
-  const comments = post.comments || []
+  const draftedMove = post.moves_drafted || {}
+  const movePool = draftedMove.moves_pool || {}
+  const comments = post.moves_comments || []
   const visibleComments = showComments ? comments : comments.slice(0, 3)
 
   return (

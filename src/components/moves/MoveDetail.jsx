@@ -6,7 +6,7 @@ import CategoryPill from '../ui/CategoryPill'
 export default function MoveDetail({ move, onClose, onComplete }) {
   if (!move) return null
 
-  const pool = move.move_pool || {}
+  const pool = move.moves_pool || {}
   const isCompleted = move.is_completed
 
   return (

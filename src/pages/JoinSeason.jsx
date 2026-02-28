@@ -48,7 +48,7 @@ export default function JoinSeason() {
     try {
       // Fetch the season by invite code
       const { data: seasonData, error: seasonError } = await supabase
-        .from('seasons')
+        .from('moves_seasons')
         .select('*')
         .eq('invite_code', inviteCode)
         .single();
@@ -72,7 +72,7 @@ export default function JoinSeason() {
 
       // Fetch current members
       const { data: memberData } = await supabase
-        .from('season_members')
+        .from('moves_season_members')
         .select('user_id, join_order, profiles(id, display_name, username, avatar_url)')
         .eq('season_id', seasonData.id)
         .order('join_order', { ascending: true });
@@ -116,7 +116,7 @@ export default function JoinSeason() {
     try {
       // Get the current max join_order
       const { data: maxData } = await supabase
-        .from('season_members')
+        .from('moves_season_members')
         .select('join_order')
         .eq('season_id', season.id)
         .order('join_order', { ascending: false })
@@ -126,7 +126,7 @@ export default function JoinSeason() {
       const nextOrder = (maxData?.join_order || 0) + 1;
 
       const { error: insertError } = await supabase
-        .from('season_members')
+        .from('moves_season_members')
         .insert({
           season_id: season.id,
           user_id: user.id,

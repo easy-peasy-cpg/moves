@@ -15,7 +15,7 @@ export default function NudgeButton({ seasonId, receiverId, draftedMoveId, moveT
     try {
       // Insert nudge record
       const { error: nudgeError } = await supabase
-        .from('nudges')
+        .from('moves_nudges')
         .insert({
           season_id: seasonId,
           sender_id: user.id,
@@ -27,7 +27,7 @@ export default function NudgeButton({ seasonId, receiverId, draftedMoveId, moveT
 
       // Insert notification for the receiver
       const { error: notifError } = await supabase
-        .from('notifications')
+        .from('moves_notifications')
         .insert({
           user_id: receiverId,
           actor_id: user.id,

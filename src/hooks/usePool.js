@@ -20,7 +20,7 @@ export function usePool(seasonId) {
       setError(null)
 
       const { data, error: fetchError } = await supabase
-        .from('move_pool')
+        .from('moves_pool')
         .select(`
           *,
           profiles:submitted_by (
@@ -58,7 +58,7 @@ export function usePool(seasonId) {
         {
           event: '*',
           schema: 'public',
-          table: 'move_pool',
+          table: 'moves_pool',
           filter: `season_id=eq.${seasonId}`,
         },
         () => {
@@ -79,7 +79,7 @@ export function usePool(seasonId) {
 
       try {
         const { data, error: insertError } = await supabase
-          .from('move_pool')
+          .from('moves_pool')
           .insert({
             season_id: seasonId,
             title,

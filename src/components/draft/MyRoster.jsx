@@ -18,7 +18,7 @@ export default function MyRoster({ moves }) {
   const grouped = useMemo(() => {
     const map = {};
     (moves || []).forEach((dm) => {
-      const cat = dm.move_pool?.category || dm.category || 'Uncategorized';
+      const cat = dm.moves_pool?.category || dm.category || 'Uncategorized';
       if (!map[cat]) map[cat] = [];
       map[cat].push(dm);
     });
@@ -94,7 +94,7 @@ export default function MyRoster({ moves }) {
                     >
                       <div className="w-1.5 h-1.5 rounded-full bg-sunset-gold shrink-0" />
                       <span className="font-body text-sm text-charcoal">
-                        {dm.move_pool?.title || dm.title || 'Untitled move'}
+                        {dm.moves_pool?.title || dm.title || 'Untitled move'}
                       </span>
                     </div>
                   ))}

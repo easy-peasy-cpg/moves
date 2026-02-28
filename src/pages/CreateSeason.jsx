@@ -87,7 +87,7 @@ export default function CreateSeason() {
       const code = generateInviteCode()
 
       const { data: seasonData, error: seasonError } = await supabase
-        .from('seasons')
+        .from('moves_seasons')
         .insert({
           name: name.trim(),
           start_date: startDate,
@@ -103,7 +103,7 @@ export default function CreateSeason() {
 
       // Add creator as first member
       const { error: memberError } = await supabase
-        .from('season_members')
+        .from('moves_season_members')
         .insert({
           season_id: seasonData.id,
           user_id: user.id,
@@ -141,7 +141,7 @@ export default function CreateSeason() {
         {
           event: 'INSERT',
           schema: 'public',
-          table: 'season_members',
+          table: 'moves_season_members',
           filter: `season_id=eq.${seasonId}`,
         },
         async (payload) => {

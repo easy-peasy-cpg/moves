@@ -17,7 +17,7 @@ export default function CompleteMoveModal({
   userId,
   members = [],
 }) {
-  const pool = move?.move_pool || {}
+  const pool = move?.moves_pool || {}
   const fileInputRef = useRef(null)
 
   const [celebrationPrompt, setCelebrationPrompt] = useState('')

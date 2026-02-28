@@ -54,8 +54,8 @@ export default function Draft() {
         id: dm.id,
         user_display_name: dm.user_display_name || dm.profiles?.display_name || 'Unknown',
         user_avatar_url: dm.user_avatar_url || dm.profiles?.avatar_url || null,
-        move_title: dm.move_pool?.title || 'Unknown Move',
-        category: dm.move_pool?.category || null,
+        move_title: dm.moves_pool?.title || 'Unknown Move',
+        category: dm.moves_pool?.category || null,
         round: dm.draft_round,
         pick_number: dm.draft_pick,
       };
@@ -388,10 +388,10 @@ export default function Draft() {
                           {dm.draft_pick}.
                         </span>
                         <span className="font-body text-sm text-charcoal flex-1 truncate">
-                          {dm.move_pool?.title || 'Untitled'}
+                          {dm.moves_pool?.title || 'Untitled'}
                         </span>
                         <CategoryPill
-                          category={dm.move_pool?.category}
+                          category={dm.moves_pool?.category}
                           size="sm"
                         />
                       </div>

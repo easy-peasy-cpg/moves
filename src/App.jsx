@@ -222,7 +222,7 @@ function useSeasonsQuick() {
 
     async function fetch() {
       const { data: memberships } = await supabase
-        .from('season_members')
+        .from('moves_season_members')
         .select('season_id')
         .eq('user_id', user.id)
 
@@ -234,7 +234,7 @@ function useSeasonsQuick() {
 
       const seasonIds = memberships.map(m => m.season_id)
       const { data } = await supabase
-        .from('seasons')
+        .from('moves_seasons')
         .select('*')
         .in('id', seasonIds)
         .order('created_at', { ascending: false })

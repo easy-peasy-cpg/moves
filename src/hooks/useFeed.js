@@ -20,7 +20,7 @@ export function useFeed(seasonId) {
       setError(null)
 
       const { data, error: fetchError } = await supabase
-        .from('feed_posts')
+        .from('moves_feed_posts')
         .select(`
           *,
           profiles:user_id (
@@ -29,18 +29,18 @@ export function useFeed(seasonId) {
             display_name,
             avatar_url
           ),
-          drafted_moves:drafted_move_id (
+          moves_drafted:drafted_move_id (
             id,
             is_completed,
             completed_at,
-            move_pool (
+            moves_pool (
               id,
               title,
               category,
               description
             )
           ),
-          comments (
+          moves_comments (
             id,
             content,
             created_at,
@@ -81,7 +81,7 @@ export function useFeed(seasonId) {
         {
           event: '*',
           schema: 'public',
-          table: 'feed_posts',
+          table: 'moves_feed_posts',
           filter: `season_id=eq.${seasonId}`,
         },
         () => {
@@ -93,7 +93,7 @@ export function useFeed(seasonId) {
         {
           event: 'INSERT',
           schema: 'public',
-          table: 'comments',
+          table: 'moves_comments',
         },
         () => {
           // Refetch posts to get updated comments
@@ -113,7 +113,7 @@ export function useFeed(seasonId) {
 
       try {
         const { data, error: insertError } = await supabase
-          .from('comments')
+          .from('moves_comments')
           .insert({
             feed_post_id: feedPostId,
             user_id: user.id,

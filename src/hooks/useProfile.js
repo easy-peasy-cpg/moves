@@ -31,7 +31,7 @@ export function useProfile(userId) {
 
       // Fetch season stats
       const { data: memberData, error: memberError } = await supabase
-        .from('season_members')
+        .from('moves_season_members')
         .select('season_id, moves_completed')
         .eq('user_id', userId)
 
