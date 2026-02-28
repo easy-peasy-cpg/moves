@@ -130,6 +130,7 @@ export default function CompleteMoveModal({
         photoUrl,
         story: story.trim() || null,
         collabPartnerId: collabPartnerId || null,
+        celebrationPrompt: celebrationPrompt || null,
       })
 
       // Fire confetti on success

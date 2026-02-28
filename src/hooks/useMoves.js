@@ -47,7 +47,7 @@ export function useMoves(seasonId, userId) {
   }, [fetchMoves])
 
   const completeMove = useCallback(
-    async (draftedMoveId, photoUrl, story, collabPartnerId) => {
+    async (draftedMoveId, photoUrl, story, collabPartnerId, celebrationPrompt) => {
       try {
         // Update the drafted move as completed
         const updateFields = {
@@ -67,11 +67,15 @@ export function useMoves(seasonId, userId) {
         if (updateError) throw updateError
 
         // Create a feed post for the completion
-        const { error: feedError } = await supabase.from('moves_feed_posts').insert({
+        const feedPost = {
           season_id: seasonId,
           user_id: userId,
           drafted_move_id: draftedMoveId,
-        })
+        }
+        if (celebrationPrompt) {
+          feedPost.celebration_prompt = celebrationPrompt
+        }
+        const { error: feedError } = await supabase.from('moves_feed_posts').insert(feedPost)
 
         if (feedError) console.error('Feed post error (non-blocking):', feedError)
 

@@ -33,6 +33,8 @@ export function useFeed(seasonId) {
             id,
             is_completed,
             completed_at,
+            completion_photo_url,
+            completion_story,
             moves_pool (
               id,
               title,
