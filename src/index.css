@@ -1,34 +1,34 @@
 @import "tailwindcss";
 
 @theme {
-  --color-sky-blue: #4A9FD9;
+  --color-sky-blue: #DEDE1B;
   --color-sunset-gold: #F5A623;
-  --color-burnt-orange: #E8762B;
+  --color-burnt-orange: #E8562B;
   --color-magenta: #D94B7A;
-  --color-sage-green: #6B9E78;
+  --color-sage-green: #4AA860;
   --color-deep-purple: #7B4FA0;
-  --color-cream: #FFF8F0;
-  --color-warm-white: #FFFDF9;
-  --color-charcoal: #2D2A26;
-  --color-warm-gray: #8A847D;
-  --color-light-warm-gray: #E8E2DA;
+  --color-cream: #F2F2EC;
+  --color-warm-white: #FFFFFF;
+  --color-charcoal: #1A1A1A;
+  --color-warm-gray: #6B6B6B;
+  --color-light-warm-gray: #E0E0DC;
 
   --font-display: "Bebas Neue", sans-serif;
   --font-body: "Source Serif 4", serif;
 }
 
 :root {
-  --sky-blue: #4A9FD9;
+  --sky-blue: #DEDE1B;
   --sunset-gold: #F5A623;
-  --burnt-orange: #E8762B;
+  --burnt-orange: #E8562B;
   --magenta: #D94B7A;
-  --sage-green: #6B9E78;
+  --sage-green: #4AA860;
   --deep-purple: #7B4FA0;
-  --cream: #FFF8F0;
-  --warm-white: #FFFDF9;
-  --charcoal: #2D2A26;
-  --warm-gray: #8A847D;
-  --light-warm-gray: #E8E2DA;
+  --cream: #F2F2EC;
+  --warm-white: #FFFFFF;
+  --charcoal: #1A1A1A;
+  --warm-gray: #6B6B6B;
+  --light-warm-gray: #E0E0DC;
 }
 
 * {
@@ -49,28 +49,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px 256px;
-}
-
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Baloo 2", cursive;
+  font-family: "Bebas Neue", sans-serif;
   color: var(--charcoal);
 }
 
 .font-display {
-  font-family: "Baloo 2", cursive;
+  font-family: "Bebas Neue", sans-serif;
 }
 
 .font-body {
@@ -130,13 +115,13 @@ h1, h2, h3, h4, h5, h6 {
 .card {
   background-color: var(--warm-white);
   border-radius: 16px;
-  border: 1px solid var(--light-warm-gray);
-  box-shadow: 0 2px 12px rgba(45, 42, 38, 0.08);
+  border: 2px solid var(--light-warm-gray);
+  box-shadow: none;
 }
 
 .category-physical { background-color: var(--sage-green); color: white; }
-.category-personal { background-color: var(--sunset-gold); color: white; }
-.category-professional { background-color: var(--sky-blue); color: white; }
+.category-personal { background-color: var(--sunset-gold); color: var(--charcoal); }
+.category-professional { background-color: var(--sky-blue); color: var(--charcoal); }
 .category-social { background-color: var(--magenta); color: white; }
 .category-creative { background-color: var(--deep-purple); color: white; }
 .category-adventure { background-color: var(--burnt-orange); color: white; }
@@ -155,7 +140,7 @@ h1, h2, h3, h4, h5, h6 {
 .progress-bar-fill {
   height: 100%;
   border-radius: 9999px;
-  background-color: var(--sunset-gold);
+  background-color: var(--sky-blue);
   transition: width 0.6s ease-out;
 }
 

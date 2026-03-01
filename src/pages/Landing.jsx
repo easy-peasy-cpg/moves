@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import Button from '../components/ui/Button';
 import CategoryPill from '../components/ui/CategoryPill';
 
-const floatingCards = [
-  { move: 'Go Skydiving', category: 'Adventure', rotation: -6, top: '8%', left: '5%', delay: 0 },
-  { move: 'Host a Dinner Party', category: 'Social', rotation: 4, top: '18%', right: '8%', delay: 1.2 },
-  { move: 'Run a 5K', category: 'Physical', rotation: -3, top: '55%', left: '3%', delay: 0.6 },
-  { move: 'Learn Guitar', category: 'Creative', rotation: 5, top: '60%', right: '4%', delay: 1.8 },
-  { move: 'Spontaneous Road Trip', category: 'Adventure', rotation: -8, top: '35%', left: '8%', delay: 2.4 },
-  { move: 'Write a Short Story', category: 'Creative', rotation: 3, top: '40%', right: '10%', delay: 0.3 },
+const stickerEmojis = [
+  { emoji: '🔥', top: '12%', left: '6%', rotation: -12, delay: 0, size: 'text-4xl md:text-5xl' },
+  { emoji: '💯', top: '22%', right: '7%', rotation: 8, delay: 1.5, size: 'text-3xl md:text-4xl' },
+  { emoji: '🏆', top: '50%', left: '4%', rotation: -5, delay: 0.8, size: 'text-3xl md:text-5xl' },
+  { emoji: '⚡', top: '55%', right: '5%', rotation: 15, delay: 2.0, size: 'text-4xl md:text-5xl' },
+  { emoji: '🎯', top: '35%', left: '9%', rotation: -8, delay: 2.5, size: 'text-3xl md:text-4xl' },
+  { emoji: '🤘', top: '42%', right: '10%', rotation: 10, delay: 0.4, size: 'text-3xl md:text-4xl' },
 ];
 
 const categories = [
@@ -43,26 +43,21 @@ const categories = [
   },
 ];
 
-function FloatingCard({ move, category, rotation, top, left, right, delay }) {
-  const style = {
-    '--rotation': `${rotation}deg`,
-    animationDelay: `${delay}s`,
-    top,
-    left,
-    right,
-  };
-
+function FloatingSticker({ emoji, rotation, top, left, right, delay, size }) {
   return (
     <div
-      className="absolute hidden md:block opacity-[0.12] pointer-events-none select-none"
-      style={style}
+      className="absolute hidden md:block pointer-events-none select-none"
+      style={{ top, left, right }}
     >
       <div
-        className="bg-warm-white rounded-2xl border border-light-warm-gray shadow-lg px-5 py-4 w-48"
-        style={{ animation: 'float 6s ease-in-out infinite', animationDelay: `${delay}s` }}
+        className={`${size} opacity-20`}
+        style={{
+          animation: 'float 6s ease-in-out infinite',
+          animationDelay: `${delay}s`,
+          transform: `rotate(${rotation}deg)`,
+        }}
       >
-        <CategoryPill category={category} size="sm" />
-        <p className="font-display text-charcoal text-base mt-2 leading-tight">{move}</p>
+        {emoji}
       </div>
     </div>
   );
@@ -222,9 +217,9 @@ function DraftDemo() {
   }));
 
   return (
-    <section className="py-20 md:py-32 px-6 bg-cream">
+    <section className="py-20 md:py-32 px-6 bg-warm-white">
       <div className="max-w-5xl mx-auto">
-        <h2 className="font-display text-3xl md:text-4xl text-charcoal text-center mb-4">
+        <h2 className="font-display text-3xl md:text-5xl text-charcoal text-center mb-4">
           See the Draft in Action
         </h2>
         <p className="font-body text-warm-gray text-center mb-12 max-w-lg mx-auto">
@@ -235,7 +230,7 @@ function DraftDemo() {
         <div
           className={[
             'rounded-xl px-5 py-3 mb-6 flex items-center justify-between transition-all duration-500',
-            draftComplete ? 'bg-sage-green/15 border border-sage-green/30' : 'bg-sunset-gold/15 border border-sunset-gold/30',
+            draftComplete ? 'bg-sage-green/15 border-2 border-sage-green/40' : 'bg-sky-blue/20 border-2 border-sky-blue/50',
           ].join(' ')}
         >
           <div className="flex items-center gap-3">
@@ -257,7 +252,7 @@ function DraftDemo() {
           </div>
           {!draftComplete && (
             <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full bg-sunset-gold animate-pulse" />
+              <div className="w-2 h-2 rounded-full bg-sky-blue animate-pulse" />
               <span className="font-body text-xs text-warm-gray font-semibold">LIVE</span>
             </div>
           )}
@@ -266,7 +261,7 @@ function DraftDemo() {
         {/* Desktop: 3-column layout */}
         <div className="hidden md:grid grid-cols-[1fr_1.8fr_1fr] gap-4" ref={containerRef}>
           {/* Left: Draft Feed */}
-          <div className="bg-warm-white rounded-2xl border border-light-warm-gray p-4 max-h-[420px] overflow-hidden">
+          <div className="bg-cream rounded-2xl border-2 border-charcoal/10 p-4 max-h-[420px] overflow-hidden">
             <h3 className="font-display text-sm text-charcoal mb-3">Draft Feed</h3>
             <div className="space-y-2">
               {[...picks].reverse().map((pick, i) => (
@@ -291,7 +286,7 @@ function DraftDemo() {
           </div>
 
           {/* Center: Pool */}
-          <div className="bg-warm-white rounded-2xl border border-light-warm-gray p-4 max-h-[420px] overflow-y-auto">
+          <div className="bg-cream rounded-2xl border-2 border-charcoal/10 p-4 max-h-[420px] overflow-y-auto">
             <div className="flex items-center justify-between mb-3">
               <h3 className="font-display text-sm text-charcoal">The Pool</h3>
               <span className="font-body text-xs text-warm-gray">{remainingPool.length} remaining</span>
@@ -305,10 +300,10 @@ function DraftDemo() {
                     onClick={() => !isDrafted && !draftComplete && handleManualPick(move.id)}
                     disabled={isDrafted || draftComplete}
                     className={[
-                      'text-left rounded-xl border p-3 transition-all duration-300',
+                      'text-left rounded-xl border-2 p-3 transition-all duration-300',
                       isDrafted
-                        ? 'opacity-30 scale-95 border-light-warm-gray bg-cream cursor-default'
-                        : 'border-light-warm-gray bg-warm-white hover:border-sky-blue hover:shadow-sm hover:-translate-y-0.5 cursor-pointer',
+                        ? 'opacity-30 scale-95 border-light-warm-gray bg-light-warm-gray/30 cursor-default'
+                        : 'border-charcoal/10 bg-warm-white hover:border-charcoal hover:shadow-sm hover:-translate-y-0.5 cursor-pointer',
                     ].join(' ')}
                   >
                     <CategoryPill category={move.category} size="sm" />
@@ -327,7 +322,7 @@ function DraftDemo() {
           {/* Right: Player Rosters */}
           <div className="space-y-3 max-h-[420px] overflow-y-auto">
             {playerPicks.map((player) => (
-              <div key={player.name} className="bg-warm-white rounded-2xl border border-light-warm-gray p-4">
+              <div key={player.name} className="bg-cream rounded-2xl border-2 border-charcoal/10 p-4">
                 <div className="flex items-center gap-2 mb-2.5">
                   <div className={`w-7 h-7 rounded-full ${player.color} text-white flex items-center justify-center font-display text-xs font-bold`}>
                     {player.initial}
@@ -355,7 +350,7 @@ function DraftDemo() {
         {/* Mobile: stacked layout */}
         <div className="md:hidden space-y-4">
           {/* Pool */}
-          <div className="bg-warm-white rounded-2xl border border-light-warm-gray p-4">
+          <div className="bg-cream rounded-2xl border-2 border-charcoal/10 p-4">
             <div className="flex items-center justify-between mb-3">
               <h3 className="font-display text-sm text-charcoal">The Pool</h3>
               <span className="font-body text-xs text-warm-gray">{remainingPool.length} left</span>
@@ -369,10 +364,10 @@ function DraftDemo() {
                     onClick={() => !isDrafted && !draftComplete && handleManualPick(move.id)}
                     disabled={isDrafted || draftComplete}
                     className={[
-                      'text-left rounded-xl border p-3 transition-all duration-300',
+                      'text-left rounded-xl border-2 p-3 transition-all duration-300',
                       isDrafted
-                        ? 'opacity-30 scale-95 border-light-warm-gray bg-cream cursor-default'
-                        : 'border-light-warm-gray bg-warm-white hover:border-sky-blue cursor-pointer active:scale-95',
+                        ? 'opacity-30 scale-95 border-light-warm-gray bg-light-warm-gray/30 cursor-default'
+                        : 'border-charcoal/10 bg-warm-white hover:border-charcoal cursor-pointer active:scale-95',
                     ].join(' ')}
                   >
                     <CategoryPill category={move.category} size="sm" />
@@ -389,7 +384,7 @@ function DraftDemo() {
           </div>
 
           {/* Pick Feed */}
-          <div className="bg-warm-white rounded-2xl border border-light-warm-gray p-4">
+          <div className="bg-cream rounded-2xl border-2 border-charcoal/10 p-4">
             <h3 className="font-display text-sm text-charcoal mb-3">Picks</h3>
             <div className="space-y-2 max-h-48 overflow-y-auto">
               {[...picks].reverse().map((pick, i) => (
@@ -446,43 +441,34 @@ export default function Landing() {
       `}</style>
 
       {/* ===== HERO ===== */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* Background gradient */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              'linear-gradient(180deg, #FFF8F0 0%, #FFF8F0 30%, #FEF0E0 55%, #FDECD4 70%, #FBE3C8 85%, #F9DCC0 100%)',
-          }}
-        />
-
-        {/* Floating cards */}
-        {floatingCards.map((card) => (
-          <FloatingCard key={card.move} {...card} />
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-sky-blue">
+        {/* Floating stickers */}
+        {stickerEmojis.map((s) => (
+          <FloatingSticker key={s.emoji} {...s} />
         ))}
 
         {/* Hero content */}
         <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
-          <h1 className="font-display text-6xl md:text-8xl font-extrabold text-sky-blue leading-none animate-fade-in-up">
-            Moves
+          <h1 className="font-display text-7xl md:text-[10rem] font-extrabold text-charcoal leading-none animate-fade-in-up tracking-tight">
+            MOVES
           </h1>
 
           <p className="font-display text-2xl md:text-3xl text-charcoal mt-4 animate-fade-in-up-delay-1">
-            What's the move? Draft it. Do it. Prove it.
+            Draft it. Do it. Prove it.
           </p>
 
-          <p className="font-body text-lg text-warm-gray max-w-xl mx-auto mt-4 animate-fade-in-up-delay-2">
-            Challenge your friends to actually do things. Draft your Moves, complete them, post the proof.
+          <p className="font-body text-lg text-charcoal/70 max-w-xl mx-auto mt-4 animate-fade-in-up-delay-2">
+            Challenge your friends to actually do things. Build a pool. Snake draft your Moves. Post the proof.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10 animate-fade-in-up-delay-3">
             <Link to="/signup">
-              <Button size="lg" variant="primary" className="text-lg px-10 py-4 shadow-xl shadow-sky-blue/20">
+              <Button size="lg" variant="primary" className="text-lg px-10 py-4 shadow-xl">
                 Start a Season
               </Button>
             </Link>
             <Link to="/join">
-              <Button size="lg" variant="secondary" className="text-lg px-10 py-4">
+              <Button size="lg" variant="secondary" className="text-lg px-10 py-4 border-charcoal text-charcoal hover:bg-charcoal hover:text-white">
                 Join a Season
               </Button>
             </Link>
@@ -491,17 +477,17 @@ export default function Landing() {
       </section>
 
       {/* ===== HOW IT WORKS ===== */}
-      <section className="py-20 md:py-32 px-6 bg-warm-white">
+      <section className="py-20 md:py-32 px-6 bg-charcoal">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-display text-3xl md:text-4xl text-charcoal text-center mb-16">
+          <h2 className="font-display text-3xl md:text-5xl text-warm-white text-center mb-16">
             How It Works
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
-            {steps.map(({ number, title, description, color, borderColor, Icon }) => (
+            {steps.map(({ number, title, description, color, Icon }) => (
               <div
                 key={number}
-                className={`relative bg-cream rounded-2xl p-8 border-t-4 ${borderColor} shadow-sm`}
+                className="relative bg-warm-white rounded-2xl p-8 border-2 border-light-warm-gray"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <span className={`font-display text-5xl font-extrabold ${color} leading-none`}>
@@ -523,12 +509,12 @@ export default function Landing() {
       <DraftDemo />
 
       {/* ===== CATEGORIES ===== */}
-      <section className="py-20 md:py-32 px-6 bg-cream">
+      <section className="py-20 md:py-32 px-6 bg-sky-blue">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-display text-3xl md:text-4xl text-charcoal text-center mb-4">
+          <h2 className="font-display text-3xl md:text-5xl text-charcoal text-center mb-4">
             7 Ways to Move
           </h2>
-          <p className="font-body text-warm-gray text-center mb-14 max-w-lg mx-auto">
+          <p className="font-body text-charcoal/70 text-center mb-14 max-w-lg mx-auto">
             Every Move falls into a category. Balance your draft across all seven for the most well-rounded season.
           </p>
 
@@ -536,7 +522,7 @@ export default function Landing() {
             {categories.map(({ name, examples }) => (
               <div
                 key={name}
-                className="bg-warm-white rounded-2xl border border-light-warm-gray p-6 hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+                className="bg-warm-white rounded-2xl border-2 border-charcoal/10 p-6 hover:border-charcoal hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="mb-4">
                   <CategoryPill category={name} size="md" className="text-base px-4 py-1.5" />
@@ -544,7 +530,7 @@ export default function Landing() {
                 <ul className="space-y-1.5">
                   {examples.map((ex) => (
                     <li key={ex} className="font-body text-warm-gray text-sm flex items-start gap-2">
-                      <span className="text-light-warm-gray mt-0.5">&#9679;</span>
+                      <span className="text-charcoal/30 mt-0.5">&#9679;</span>
                       {ex}
                     </li>
                   ))}
@@ -553,8 +539,8 @@ export default function Landing() {
             ))}
 
             {/* Extra cell for visual balance on lg grid */}
-            <div className="hidden lg:flex bg-warm-white rounded-2xl border border-light-warm-gray p-6 items-center justify-center">
-              <p className="font-display text-xl text-warm-gray text-center">
+            <div className="hidden lg:flex bg-charcoal rounded-2xl border-2 border-charcoal p-6 items-center justify-center">
+              <p className="font-display text-xl text-warm-white text-center">
                 Your crew picks.<br />You draft.<br />You do the thing.
               </p>
             </div>
@@ -563,62 +549,45 @@ export default function Landing() {
       </section>
 
       {/* ===== SOCIAL PROOF / ENERGY ===== */}
-      <section className="py-20 md:py-32 px-6 bg-warm-white relative overflow-hidden">
-        {/* Decorative blobs */}
-        <div
-          className="absolute top-10 left-0 w-72 h-72 rounded-full opacity-[0.06] pointer-events-none"
-          style={{ background: 'radial-gradient(circle, #F5A623, transparent 70%)' }}
-        />
-        <div
-          className="absolute bottom-10 right-0 w-96 h-96 rounded-full opacity-[0.05] pointer-events-none"
-          style={{ background: 'radial-gradient(circle, #D94B7A, transparent 70%)' }}
-        />
-
+      <section className="py-20 md:py-32 px-6 bg-charcoal relative overflow-hidden">
         <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <blockquote className="font-display text-2xl md:text-3xl text-charcoal leading-snug">
-            <span className="text-sunset-gold text-5xl leading-none align-text-top">"</span>
+          <span className="text-5xl mb-6 inline-block">🎤</span>
+          <blockquote className="font-display text-2xl md:text-4xl text-warm-white leading-snug">
+            <span className="text-sky-blue text-5xl leading-none align-text-top">"</span>
             Fantasy football kept your friend group together.{' '}
-            <span className="text-sunset-gold">Moves</span> keeps your friend group alive.
-            <span className="text-sunset-gold text-5xl leading-none align-text-top">"</span>
+            <span className="text-sky-blue">Moves</span> keeps your friend group alive.
+            <span className="text-sky-blue text-5xl leading-none align-text-top">"</span>
           </blockquote>
 
-          <p className="font-body text-warm-gray text-lg mt-10">
+          <p className="font-body text-light-warm-gray text-lg mt-10">
             Draft your Moves. Do the things. Prove it happened.
           </p>
         </div>
       </section>
 
       {/* ===== FINAL CTA ===== */}
-      <section className="py-20 md:py-32 px-6 relative overflow-hidden">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              'linear-gradient(180deg, #FFF8F0 0%, #FDECD4 50%, #FBE3C8 100%)',
-          }}
-        />
-
+      <section className="py-20 md:py-32 px-6 bg-sky-blue relative overflow-hidden">
         <div className="relative z-10 max-w-2xl mx-auto text-center">
-          <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-6">
-            Ready to make your move?
+          <h2 className="font-display text-4xl md:text-6xl text-charcoal mb-6">
+            Ready to Make Your Move?
           </h2>
 
           <Link to="/signup">
-            <Button size="lg" variant="primary" className="text-lg px-12 py-4 shadow-xl shadow-sky-blue/20">
+            <Button size="lg" variant="primary" className="text-lg px-12 py-4 shadow-xl">
               Start a Season
             </Button>
           </Link>
 
-          <p className="font-body text-warm-gray mt-6">
+          <p className="font-body text-charcoal/70 mt-6">
             It takes 2 minutes to set up. The memories last forever.
           </p>
         </div>
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="py-10 px-6 bg-charcoal">
+      <footer className="py-10 px-6 bg-charcoal border-t-4 border-sky-blue">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <span className="font-display text-2xl font-bold text-sky-blue">Moves</span>
+          <span className="font-display text-2xl font-bold text-sky-blue">MOVES</span>
 
           <div className="flex items-center gap-6">
             <Link

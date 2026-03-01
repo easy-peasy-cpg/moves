@@ -2,13 +2,15 @@ import React from 'react';
 
 const variants = {
   primary:
-    'bg-sky-blue text-white hover:scale-[1.02] hover:shadow-lg active:scale-[0.98]',
+    'bg-charcoal text-white hover:scale-[1.02] hover:shadow-lg active:scale-[0.98]',
   secondary:
-    'border-2 border-charcoal text-charcoal bg-transparent hover:bg-charcoal/5',
+    'border-2 border-charcoal text-charcoal bg-transparent hover:bg-charcoal hover:text-white',
   destructive:
     'bg-burnt-orange text-white hover:scale-[1.02] hover:shadow-lg active:scale-[0.98]',
   ghost:
     'bg-transparent text-charcoal hover:bg-charcoal/5',
+  yellow:
+    'bg-sky-blue text-charcoal hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] font-bold',
 };
 
 const sizes = {
