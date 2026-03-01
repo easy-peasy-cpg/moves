@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/ui/Button';
 import CategoryPill from '../components/ui/CategoryPill';
@@ -138,6 +138,284 @@ const steps = [
   },
 ];
 
+// ===== DRAFT DEMO DATA =====
+const demoPlayers = [
+  { name: 'Alex', color: 'bg-sky-blue', initial: 'A' },
+  { name: 'Jordan', color: 'bg-sunset-gold', initial: 'J' },
+  { name: 'Sam', color: 'bg-magenta', initial: 'S' },
+];
+
+const demoPool = [
+  { id: 1, title: 'Run a Half Marathon', category: 'physical' },
+  { id: 2, title: 'Host a Dinner Party', category: 'social' },
+  { id: 3, title: 'Learn to Play Piano', category: 'creative' },
+  { id: 4, title: 'Go Skydiving', category: 'adventure' },
+  { id: 5, title: 'Read 5 Books', category: 'personal' },
+  { id: 6, title: 'Give a Public Talk', category: 'professional' },
+  { id: 7, title: 'Sunrise Hike', category: 'adventure' },
+  { id: 8, title: 'Write a Short Film', category: 'creative' },
+  { id: 9, title: 'Volunteer Somewhere New', category: 'social' },
+  { id: 10, title: 'Cold Plunge Challenge', category: 'physical' },
+  { id: 11, title: 'Karaoke Night', category: 'wildcard' },
+  { id: 12, title: 'Build a Side Project', category: 'professional' },
+];
+
+// Snake draft order for 3 players: 0,1,2,2,1,0,0,1,2,...
+function getSnakeDrafter(pickIndex, playerCount) {
+  const round = Math.floor(pickIndex / playerCount);
+  const pos = pickIndex % playerCount;
+  return round % 2 === 0 ? pos : playerCount - 1 - pos;
+}
+
+function DraftDemo() {
+  const [picks, setPicks] = useState([]);
+  const [isPaused, setIsPaused] = useState(false);
+  const timerRef = useRef(null);
+  const containerRef = useRef(null);
+
+  const currentDrafterIndex = getSnakeDrafter(picks.length, demoPlayers.length);
+  const currentDrafter = demoPlayers[currentDrafterIndex];
+  const remainingPool = demoPool.filter((m) => !picks.some((p) => p.moveId === m.id));
+  const draftComplete = remainingPool.length === 0;
+
+  const makePick = useCallback((moveId) => {
+    const move = demoPool.find((m) => m.id === moveId);
+    if (!move) return;
+    const drafter = demoPlayers[getSnakeDrafter(picks.length, demoPlayers.length)];
+    setPicks((prev) => [...prev, { moveId: move.id, title: move.title, category: move.category, player: drafter }]);
+  }, [picks.length]);
+
+  // Auto-play
+  useEffect(() => {
+    if (isPaused || draftComplete) {
+      if (draftComplete) {
+        timerRef.current = setTimeout(() => {
+          setPicks([]);
+          setIsPaused(false);
+        }, 3000);
+      }
+      return () => clearTimeout(timerRef.current);
+    }
+
+    timerRef.current = setTimeout(() => {
+      const pool = demoPool.filter((m) => !picks.some((p) => p.moveId === m.id));
+      if (pool.length > 0) {
+        makePick(pool[0].id);
+      }
+    }, 2000);
+
+    return () => clearTimeout(timerRef.current);
+  }, [picks, isPaused, draftComplete, makePick]);
+
+  function handleManualPick(moveId) {
+    if (draftComplete) return;
+    // Pause auto-play briefly on interaction, then resume
+    setIsPaused(true);
+    makePick(moveId);
+    setTimeout(() => setIsPaused(false), 2500);
+  }
+
+  // Group picks by player
+  const playerPicks = demoPlayers.map((player) => ({
+    ...player,
+    moves: picks.filter((p) => p.player.name === player.name),
+  }));
+
+  return (
+    <section className="py-20 md:py-32 px-6 bg-cream">
+      <div className="max-w-5xl mx-auto">
+        <h2 className="font-display text-3xl md:text-4xl text-charcoal text-center mb-4">
+          See the Draft in Action
+        </h2>
+        <p className="font-body text-warm-gray text-center mb-12 max-w-lg mx-auto">
+          Three friends. Twelve Moves. Snake draft. Click a Move to pick it yourself, or sit back and watch.
+        </p>
+
+        {/* On the Clock Banner */}
+        <div
+          className={[
+            'rounded-xl px-5 py-3 mb-6 flex items-center justify-between transition-all duration-500',
+            draftComplete ? 'bg-sage-green/15 border border-sage-green/30' : 'bg-sunset-gold/15 border border-sunset-gold/30',
+          ].join(' ')}
+        >
+          <div className="flex items-center gap-3">
+            {!draftComplete && (
+              <div className={`w-8 h-8 rounded-full ${currentDrafter.color} text-white flex items-center justify-center font-display text-sm font-bold`}>
+                {currentDrafter.initial}
+              </div>
+            )}
+            <div>
+              <p className="font-display text-sm text-charcoal">
+                {draftComplete ? 'Draft Complete!' : `${currentDrafter.name} is on the clock`}
+              </p>
+              <p className="font-body text-xs text-warm-gray">
+                {draftComplete
+                  ? 'Everyone has their Moves. Restarting...'
+                  : `Round ${Math.floor(picks.length / demoPlayers.length) + 1}, Pick ${picks.length + 1}`}
+              </p>
+            </div>
+          </div>
+          {!draftComplete && (
+            <div className="flex items-center gap-1.5">
+              <div className="w-2 h-2 rounded-full bg-sunset-gold animate-pulse" />
+              <span className="font-body text-xs text-warm-gray font-semibold">LIVE</span>
+            </div>
+          )}
+        </div>
+
+        {/* Desktop: 3-column layout */}
+        <div className="hidden md:grid grid-cols-[1fr_1.8fr_1fr] gap-4" ref={containerRef}>
+          {/* Left: Draft Feed */}
+          <div className="bg-warm-white rounded-2xl border border-light-warm-gray p-4 max-h-[420px] overflow-hidden">
+            <h3 className="font-display text-sm text-charcoal mb-3">Draft Feed</h3>
+            <div className="space-y-2">
+              {[...picks].reverse().map((pick, i) => (
+                <div
+                  key={`${pick.moveId}-${i}`}
+                  className="flex items-center gap-2.5 py-2 px-2.5 rounded-lg bg-cream/60 animate-fade-up"
+                  style={{ animationDuration: '0.3s' }}
+                >
+                  <div className={`w-6 h-6 rounded-full ${pick.player.color} text-white flex items-center justify-center text-[10px] font-bold shrink-0`}>
+                    {pick.player.initial}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="font-body text-xs text-charcoal font-semibold truncate">{pick.title}</p>
+                    <p className="font-body text-[10px] text-warm-gray">{pick.player.name}</p>
+                  </div>
+                </div>
+              ))}
+              {picks.length === 0 && (
+                <p className="font-body text-xs text-warm-gray text-center py-4">Waiting for first pick...</p>
+              )}
+            </div>
+          </div>
+
+          {/* Center: Pool */}
+          <div className="bg-warm-white rounded-2xl border border-light-warm-gray p-4 max-h-[420px] overflow-y-auto">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="font-display text-sm text-charcoal">The Pool</h3>
+              <span className="font-body text-xs text-warm-gray">{remainingPool.length} remaining</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {demoPool.map((move) => {
+                const isDrafted = picks.some((p) => p.moveId === move.id);
+                return (
+                  <button
+                    key={move.id}
+                    onClick={() => !isDrafted && !draftComplete && handleManualPick(move.id)}
+                    disabled={isDrafted || draftComplete}
+                    className={[
+                      'text-left rounded-xl border p-3 transition-all duration-300',
+                      isDrafted
+                        ? 'opacity-30 scale-95 border-light-warm-gray bg-cream cursor-default'
+                        : 'border-light-warm-gray bg-warm-white hover:border-sky-blue hover:shadow-sm hover:-translate-y-0.5 cursor-pointer',
+                    ].join(' ')}
+                  >
+                    <CategoryPill category={move.category} size="sm" />
+                    <p className={[
+                      'font-body text-sm font-semibold mt-1.5 leading-snug',
+                      isDrafted ? 'text-warm-gray line-through' : 'text-charcoal',
+                    ].join(' ')}>
+                      {move.title}
+                    </p>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Right: Player Rosters */}
+          <div className="space-y-3 max-h-[420px] overflow-y-auto">
+            {playerPicks.map((player) => (
+              <div key={player.name} className="bg-warm-white rounded-2xl border border-light-warm-gray p-4">
+                <div className="flex items-center gap-2 mb-2.5">
+                  <div className={`w-7 h-7 rounded-full ${player.color} text-white flex items-center justify-center font-display text-xs font-bold`}>
+                    {player.initial}
+                  </div>
+                  <span className="font-body text-sm font-semibold text-charcoal">{player.name}</span>
+                  <span className="font-body text-xs text-warm-gray ml-auto">{player.moves.length}</span>
+                </div>
+                <div className="space-y-1">
+                  {player.moves.map((move, i) => (
+                    <div key={move.moveId} className="flex items-center gap-2 animate-fade-up" style={{ animationDuration: '0.3s' }}>
+                      <span className="font-body text-[10px] text-warm-gray w-3 text-right shrink-0">{i + 1}</span>
+                      <CategoryPill category={move.category} size="sm" />
+                      <span className="font-body text-xs text-charcoal truncate">{move.title}</span>
+                    </div>
+                  ))}
+                  {player.moves.length === 0 && (
+                    <p className="font-body text-[10px] text-warm-gray italic">No picks yet</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile: stacked layout */}
+        <div className="md:hidden space-y-4">
+          {/* Pool */}
+          <div className="bg-warm-white rounded-2xl border border-light-warm-gray p-4">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="font-display text-sm text-charcoal">The Pool</h3>
+              <span className="font-body text-xs text-warm-gray">{remainingPool.length} left</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {demoPool.map((move) => {
+                const isDrafted = picks.some((p) => p.moveId === move.id);
+                return (
+                  <button
+                    key={move.id}
+                    onClick={() => !isDrafted && !draftComplete && handleManualPick(move.id)}
+                    disabled={isDrafted || draftComplete}
+                    className={[
+                      'text-left rounded-xl border p-3 transition-all duration-300',
+                      isDrafted
+                        ? 'opacity-30 scale-95 border-light-warm-gray bg-cream cursor-default'
+                        : 'border-light-warm-gray bg-warm-white hover:border-sky-blue cursor-pointer active:scale-95',
+                    ].join(' ')}
+                  >
+                    <CategoryPill category={move.category} size="sm" />
+                    <p className={[
+                      'font-body text-xs font-semibold mt-1 leading-snug',
+                      isDrafted ? 'text-warm-gray line-through' : 'text-charcoal',
+                    ].join(' ')}>
+                      {move.title}
+                    </p>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Pick Feed */}
+          <div className="bg-warm-white rounded-2xl border border-light-warm-gray p-4">
+            <h3 className="font-display text-sm text-charcoal mb-3">Picks</h3>
+            <div className="space-y-2 max-h-48 overflow-y-auto">
+              {[...picks].reverse().map((pick, i) => (
+                <div
+                  key={`m-${pick.moveId}-${i}`}
+                  className="flex items-center gap-2.5 py-1.5 animate-fade-up"
+                  style={{ animationDuration: '0.3s' }}
+                >
+                  <div className={`w-6 h-6 rounded-full ${pick.player.color} text-white flex items-center justify-center text-[10px] font-bold shrink-0`}>
+                    {pick.player.initial}
+                  </div>
+                  <span className="font-body text-xs text-charcoal font-semibold truncate">{pick.title}</span>
+                  <CategoryPill category={pick.category} size="sm" />
+                </div>
+              ))}
+              {picks.length === 0 && (
+                <p className="font-body text-xs text-warm-gray text-center py-3">Waiting for first pick...</p>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Landing() {
   return (
     <div className="min-h-screen bg-cream overflow-hidden">
@@ -240,6 +518,9 @@ export default function Landing() {
           </div>
         </div>
       </section>
+
+      {/* ===== DRAFT DEMO ===== */}
+      <DraftDemo />
 
       {/* ===== CATEGORIES ===== */}
       <section className="py-20 md:py-32 px-6 bg-cream">
