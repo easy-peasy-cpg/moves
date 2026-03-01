@@ -13,8 +13,8 @@
   --color-warm-gray: #8A847D;
   --color-light-warm-gray: #E8E2DA;
 
-  --font-display: "Baloo 2", cursive;
-  --font-body: "DM Sans", sans-serif;
+  --font-display: "Bebas Neue", sans-serif;
+  --font-body: "Source Serif 4", serif;
 }
 
 :root {
@@ -35,9 +35,14 @@
   box-sizing: border-box;
 }
 
+.font-display {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
 body {
   margin: 0;
-  font-family: "DM Sans", sans-serif;
+  font-family: "Source Serif 4", serif;
   background-color: var(--cream);
   color: var(--charcoal);
   -webkit-font-smoothing: antialiased;
@@ -69,7 +74,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .font-body {
-  font-family: "DM Sans", sans-serif;
+  font-family: "Source Serif 4", serif;
 }
 
 @keyframes fadeUp {
