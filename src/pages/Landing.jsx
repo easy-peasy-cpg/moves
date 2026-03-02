@@ -108,27 +108,24 @@ const steps = [
     number: '1',
     title: 'Build the Pool',
     description:
-      'Your crew adds Moves to the pool. Physical challenges, creative projects, adventures, professional goals. Mix in some easy wins and some that scare you.',
+      'Everyone in your group suggests real-life challenges and goals — hike a mountain, throw a dinner party, learn to surf, read 5 books. These all go into a shared pool.',
     color: 'text-sunset-gold',
-    borderColor: 'border-sunset-gold',
     Icon: PoolIcon,
   },
   {
     number: '2',
-    title: 'Draft Your 20',
+    title: 'Draft Your Moves',
     description:
-      'Snake draft, just like fantasy. Pick the Moves you actually want to do. Strategy matters: do you grab the fun ones first or lock in the hard ones?',
+      'Take turns picking from the pool, like a fantasy draft. You choose the challenges you actually want to commit to. Grab the fun ones early or lock in the hard ones — strategy is up to you.',
     color: 'text-sky-blue',
-    borderColor: 'border-sky-blue',
     Icon: DraftIcon,
   },
   {
     number: '3',
-    title: 'Make Your Moves',
+    title: 'Go Do Them',
     description:
-      'Complete your Moves throughout the season. Post photo proof. Talk trash. Get nudged. Celebrate wins. See who makes the most Moves.',
+      'You have a full season to complete your Moves. Post a photo when you finish one. Nudge friends who are slacking. See who completes the most by the end.',
     color: 'text-sage-green',
-    borderColor: 'border-sage-green',
     Icon: CelebrateIcon,
   },
 ];
@@ -220,10 +217,10 @@ function DraftDemo() {
     <section className="py-20 md:py-32 px-6 bg-warm-white">
       <div className="max-w-5xl mx-auto">
         <h2 className="font-display text-3xl md:text-5xl text-charcoal text-center mb-4">
-          See the Draft in Action
+          Watch a Draft Happen
         </h2>
         <p className="font-body text-warm-gray text-center mb-12 max-w-lg mx-auto">
-          Three friends. Twelve Moves. Snake draft. Click a Move to pick it yourself, or sit back and watch.
+          Three friends take turns picking Moves from a shared pool. Click any Move to draft it yourself, or sit back and watch the auto-draft play out.
         </p>
 
         {/* On the Clock Banner */}
@@ -454,11 +451,11 @@ export default function Landing() {
           </h1>
 
           <p className="font-display text-2xl md:text-3xl text-charcoal mt-4 animate-fade-in-up-delay-1">
-            Draft it. Do it. Prove it.
+            Fantasy sports, but for real life.
           </p>
 
           <p className="font-body text-lg text-charcoal/70 max-w-xl mx-auto mt-4 animate-fade-in-up-delay-2">
-            Challenge your friends to actually do things. Build a pool. Snake draft your Moves. Post the proof.
+            A Move is anything you want to do — run a 5K, host a dinner party, go skydiving, learn guitar. You and your friends draft Moves, then you have a season to actually do them.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10 animate-fade-in-up-delay-3">
@@ -505,6 +502,18 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* ===== WHAT'S A MOVE ===== */}
+      <section className="py-16 md:py-24 px-6 bg-warm-white">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="font-display text-3xl md:text-5xl text-charcoal mb-6">
+            So What's a "Move"?
+          </h2>
+          <p className="font-body text-lg text-warm-gray leading-relaxed max-w-2xl mx-auto">
+            A Move is something you want to do in real life — big or small. Run a half marathon. Try karaoke. Camp under the stars. Volunteer somewhere new. Your group comes up with the Moves, and you draft the ones you're going to commit to. No more "we should totally do that someday." You drafted it. Now go do it.
+          </p>
+        </div>
+      </section>
+
       {/* ===== DRAFT DEMO ===== */}
       <DraftDemo />
 
@@ -512,10 +521,10 @@ export default function Landing() {
       <section className="py-20 md:py-32 px-6 bg-sky-blue">
         <div className="max-w-5xl mx-auto">
           <h2 className="font-display text-3xl md:text-5xl text-charcoal text-center mb-4">
-            7 Ways to Move
+            Moves Come in All Shapes
           </h2>
           <p className="font-body text-charcoal/70 text-center mb-14 max-w-lg mx-auto">
-            Every Move falls into a category. Balance your draft across all seven for the most well-rounded season.
+            Every Move falls into one of seven categories. A good season has a mix — some that push you, some that connect you, and a few that scare you a little.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -554,13 +563,12 @@ export default function Landing() {
           <span className="text-5xl mb-6 inline-block">🎤</span>
           <blockquote className="font-display text-2xl md:text-4xl text-warm-white leading-snug">
             <span className="text-sky-blue text-5xl leading-none align-text-top">"</span>
-            Fantasy football kept your friend group together.{' '}
-            <span className="text-sky-blue">Moves</span> keeps your friend group alive.
+            We kept saying we'd do stuff together. Now we actually do it. The draft makes it real.
             <span className="text-sky-blue text-5xl leading-none align-text-top">"</span>
           </blockquote>
 
           <p className="font-body text-light-warm-gray text-lg mt-10">
-            Draft your Moves. Do the things. Prove it happened.
+            Stop talking about it. Draft it. Do it. Post the proof.
           </p>
         </div>
       </section>
@@ -568,9 +576,12 @@ export default function Landing() {
       {/* ===== FINAL CTA ===== */}
       <section className="py-20 md:py-32 px-6 bg-sky-blue relative overflow-hidden">
         <div className="relative z-10 max-w-2xl mx-auto text-center">
-          <h2 className="font-display text-4xl md:text-6xl text-charcoal mb-6">
+          <h2 className="font-display text-4xl md:text-6xl text-charcoal mb-4">
             Ready to Make Your Move?
           </h2>
+          <p className="font-body text-charcoal/70 mb-8 max-w-md mx-auto">
+            Grab your crew, build a pool of challenges, draft your Moves, and see who actually follows through.
+          </p>
 
           <Link to="/signup">
             <Button size="lg" variant="primary" className="text-lg px-12 py-4 shadow-xl">
@@ -578,8 +589,8 @@ export default function Landing() {
             </Button>
           </Link>
 
-          <p className="font-body text-charcoal/70 mt-6">
-            It takes 2 minutes to set up. The memories last forever.
+          <p className="font-body text-charcoal/60 mt-6 text-sm">
+            Free to play. Takes 2 minutes to set up.
           </p>
         </div>
       </section>
