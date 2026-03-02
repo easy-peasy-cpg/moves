@@ -3,57 +3,47 @@ import { Link } from 'react-router-dom';
 import Button from '../components/ui/Button';
 import CategoryPill from '../components/ui/CategoryPill';
 
-// Floating SVG icon components for hero background
-function IconStar() {
+// Retro sparkle/starburst SVG icons
+function Sparkle4({ size = 40, className = '' }) {
   return (
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M12 0L13.5 9.5L24 12L13.5 14.5L12 24L10.5 14.5L0 12L10.5 9.5Z" />
     </svg>
   );
 }
-function IconBolt() {
+function Starburst({ size = 44, className = '' }) {
   return (
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M12 0L13.2 8.4L18 2.4L14.4 9.6L22.8 8.4L15.6 12L22.8 15.6L14.4 14.4L18 21.6L13.2 15.6L12 24L10.8 15.6L6 21.6L9.6 14.4L1.2 15.6L8.4 12L1.2 8.4L9.6 9.6L6 2.4L10.8 8.4Z" />
     </svg>
   );
 }
-function IconTarget() {
+function RetroFlower({ size = 36, className = '' }) {
   return (
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <circle cx="12" cy="6" r="4" opacity="0.7" />
+      <circle cx="18" cy="12" r="4" opacity="0.7" />
+      <circle cx="12" cy="18" r="4" opacity="0.7" />
+      <circle cx="6" cy="12" r="4" opacity="0.7" />
+      <circle cx="12" cy="12" r="3" />
     </svg>
   );
 }
-function IconMountain() {
+function RetroDiamond({ size = 32, className = '' }) {
   return (
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M8 3l4 8 5-5 5 15H2L8 3z" />
-    </svg>
-  );
-}
-function IconFlag() {
-  return (
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" /><line x1="4" y1="22" x2="4" y2="15" />
-    </svg>
-  );
-}
-function IconCompass() {
-  return (
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10" /><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M12 2L22 12L12 22L2 12Z" />
     </svg>
   );
 }
 
 const floatingIcons = [
-  { Icon: IconStar, top: '12%', left: '6%', rotation: -12, delay: 0 },
-  { Icon: IconBolt, top: '22%', right: '7%', rotation: 8, delay: 1.5 },
-  { Icon: IconMountain, top: '50%', left: '4%', rotation: -5, delay: 0.8 },
-  { Icon: IconCompass, top: '55%', right: '5%', rotation: 15, delay: 2.0 },
-  { Icon: IconTarget, top: '35%', left: '9%', rotation: -8, delay: 2.5 },
-  { Icon: IconFlag, top: '42%', right: '10%', rotation: 10, delay: 0.4 },
+  { Icon: Sparkle4, top: '10%', left: '6%', rotation: 0, delay: 0, color: 'text-magenta/25' },
+  { Icon: Starburst, top: '20%', right: '7%', rotation: 15, delay: 1.5, color: 'text-sky-blue/25' },
+  { Icon: RetroFlower, top: '50%', left: '4%', rotation: -10, delay: 0.8, color: 'text-burnt-orange/20' },
+  { Icon: Sparkle4, top: '55%', right: '5%', rotation: 30, delay: 2.0, color: 'text-deep-purple/25' },
+  { Icon: RetroDiamond, top: '35%', left: '9%', rotation: 45, delay: 2.5, color: 'text-sunset-gold/25' },
+  { Icon: RetroFlower, top: '42%', right: '10%', rotation: 20, delay: 0.4, color: 'text-magenta/20' },
 ];
 
 const categories = [
@@ -87,10 +77,10 @@ const categories = [
   },
 ];
 
-function FloatingIcon({ Icon, rotation, top, left, right, delay }) {
+function FloatingIcon({ Icon, rotation, top, left, right, delay, color = 'text-charcoal/15' }) {
   return (
     <div
-      className="absolute hidden md:block pointer-events-none select-none text-charcoal/15"
+      className={`absolute hidden md:block pointer-events-none select-none ${color}`}
       style={{ top, left, right }}
     >
       <div
@@ -160,7 +150,7 @@ const steps = [
     title: 'Snake Draft',
     description:
       'Just like fantasy football, you take turns picking Moves from the pool. The draft order snakes each round so it stays fair. Grab the ones you actually want to do — or steal the ones you know your friends want.',
-    color: 'text-sky-blue',
+    color: 'text-burnt-orange',
     Icon: DraftIcon,
   },
   {
@@ -168,7 +158,7 @@ const steps = [
     title: 'Go Do Them',
     description:
       'You have a full season to complete your Moves. Snap a photo when you finish one. Nudge friends who are slacking. Talk trash in the feed. Whoever completes the most wins.',
-    color: 'text-sage-green',
+    color: 'text-magenta',
     Icon: CelebrateIcon,
   },
 ];
@@ -176,7 +166,7 @@ const steps = [
 // ===== DASHBOARD DEMO DATA =====
 const dashboardPlayers = [
   {
-    name: 'Alex', initial: 'A', color: 'bg-sky-blue',
+    name: 'Alex', initial: 'A', color: 'bg-burnt-orange',
     completed: 7,
     moves: [
       { title: 'Run a Half Marathon', category: 'physical', done: true },
@@ -515,7 +505,7 @@ function DraftDemo() {
   }));
 
   return (
-    <section className="py-20 md:py-32 px-6 bg-warm-white">
+    <section className="py-20 md:py-32 px-6 bg-cream retro-bg">
       <div className="max-w-5xl mx-auto">
         <h2 className="font-display text-3xl md:text-5xl text-charcoal text-center mb-4">
           Watch a Draft Happen
@@ -528,7 +518,7 @@ function DraftDemo() {
         <div
           className={[
             'rounded-xl px-5 py-3 mb-6 flex items-center justify-between transition-all duration-500',
-            draftComplete ? 'bg-sage-green/15 border-2 border-sage-green/40' : 'bg-sky-blue/20 border-2 border-sky-blue/50',
+            draftComplete ? 'bg-sage-green/15 border-2 border-sage-green/40' : 'bg-magenta/15 border-2 border-magenta/40',
           ].join(' ')}
         >
           <div className="flex items-center gap-3">
@@ -550,7 +540,7 @@ function DraftDemo() {
           </div>
           {!draftComplete && (
             <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full bg-sky-blue animate-pulse" />
+              <div className="w-2 h-2 rounded-full bg-burnt-orange animate-pulse" />
               <span className="font-body text-xs text-warm-gray font-semibold">LIVE</span>
             </div>
           )}
@@ -739,7 +729,7 @@ export default function Landing() {
       `}</style>
 
       {/* ===== HERO ===== */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-sky-blue">
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-cream retro-bg">
         {/* Floating icons */}
         {floatingIcons.map((s, i) => (
           <FloatingIcon key={i} {...s} />
@@ -747,7 +737,7 @@ export default function Landing() {
 
         {/* Hero content */}
         <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
-          <h1 className="text-7xl md:text-[10rem] text-charcoal leading-none animate-fade-in-up" style={{ fontFamily: 'var(--font-logo)' }}>
+          <h1 className="text-7xl md:text-[10rem] text-deep-purple leading-none animate-fade-in-up" style={{ fontFamily: 'var(--font-logo)' }}>
             MOVES
           </h1>
 
@@ -755,18 +745,18 @@ export default function Landing() {
             Fantasy sports, but for real life.
           </p>
 
-          <p className="font-body text-lg text-charcoal/70 max-w-xl mx-auto mt-4 animate-fade-in-up-delay-2">
+          <p className="font-body text-lg text-warm-gray max-w-xl mx-auto mt-4 animate-fade-in-up-delay-2">
             Get your friends together. Everyone secretly submits real-life challenges. Then you snake draft to claim the ones you'll actually do. Think fantasy football, but instead of watching players — you are the player.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10 animate-fade-in-up-delay-3">
             <Link to="/signup">
-              <Button size="lg" variant="primary" className="text-lg px-10 py-4 shadow-xl">
+              <Button size="lg" variant="primary" className="text-lg px-10 py-4 shadow-xl shadow-burnt-orange/20">
                 Start a Season
               </Button>
             </Link>
             <Link to="/join">
-              <Button size="lg" variant="secondary" className="text-lg px-10 py-4 border-charcoal text-charcoal hover:bg-charcoal hover:text-white">
+              <Button size="lg" variant="secondary" className="text-lg px-10 py-4">
                 Join a Season
               </Button>
             </Link>
@@ -775,7 +765,7 @@ export default function Landing() {
       </section>
 
       {/* ===== HOW IT WORKS ===== */}
-      <section className="py-20 md:py-32 px-6 bg-charcoal">
+      <section className="py-20 md:py-32 px-6 bg-deep-purple">
         <div className="max-w-5xl mx-auto">
           <h2 className="font-display text-3xl md:text-5xl text-warm-white text-center mb-16">
             How It Works
@@ -804,7 +794,7 @@ export default function Landing() {
       </section>
 
       {/* ===== WHAT'S A MOVE ===== */}
-      <section className="py-16 md:py-24 px-6 bg-warm-white">
+      <section className="py-16 md:py-24 px-6 bg-warm-white retro-bg">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-display text-3xl md:text-5xl text-charcoal mb-6">
             So What's a "Move"?
@@ -822,12 +812,12 @@ export default function Landing() {
       <DashboardDemo />
 
       {/* ===== CATEGORIES ===== */}
-      <section className="py-20 md:py-32 px-6 bg-sky-blue">
+      <section className="py-20 md:py-32 px-6 bg-sky-blue/30 retro-bg">
         <div className="max-w-5xl mx-auto">
           <h2 className="font-display text-3xl md:text-5xl text-charcoal text-center mb-4">
             Moves Come in All Shapes
           </h2>
-          <p className="font-body text-charcoal/70 text-center mb-14 max-w-lg mx-auto">
+          <p className="font-body text-warm-gray text-center mb-14 max-w-lg mx-auto">
             Every Move falls into one of seven categories. A good season has a mix — some that push you, some that connect you, and a few that scare you a little.
           </p>
 
@@ -835,7 +825,7 @@ export default function Landing() {
             {categories.map(({ name, examples }) => (
               <div
                 key={name}
-                className="bg-warm-white rounded-2xl border-2 border-charcoal/10 p-6 hover:border-charcoal hover:-translate-y-1 transition-all duration-300"
+                className="bg-warm-white rounded-2xl border-2 border-light-warm-gray p-6 hover:border-deep-purple hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="mb-4">
                   <CategoryPill category={name} size="md" className="text-base px-4 py-1.5" />
@@ -852,7 +842,7 @@ export default function Landing() {
             ))}
 
             {/* Extra cell for visual balance on lg grid */}
-            <div className="hidden lg:flex bg-charcoal rounded-2xl border-2 border-charcoal p-6 items-center justify-center">
+            <div className="hidden lg:flex bg-deep-purple rounded-2xl border-2 border-deep-purple p-6 items-center justify-center">
               <p className="font-display text-xl text-warm-white text-center">
                 Your crew picks.<br />You draft.<br />You do the thing.
               </p>
@@ -863,11 +853,13 @@ export default function Landing() {
 
       {/* ===== SOCIAL PROOF / ENERGY ===== */}
       <section className="py-20 md:py-32 px-6 bg-charcoal relative overflow-hidden">
+        <div className="absolute top-8 right-12 hidden md:block text-magenta/20"><Sparkle4 size={60} /></div>
+        <div className="absolute bottom-12 left-10 hidden md:block text-sky-blue/20"><Sparkle4 size={40} /></div>
         <div className="relative z-10 max-w-3xl mx-auto text-center">
           <blockquote className="font-display text-2xl md:text-4xl text-warm-white leading-snug">
-            <span className="text-sky-blue text-5xl leading-none align-text-top">"</span>
+            <span className="text-burnt-orange text-5xl leading-none align-text-top">"</span>
             We kept saying we'd do stuff together. Now we actually do it. The draft makes it real.
-            <span className="text-sky-blue text-5xl leading-none align-text-top">"</span>
+            <span className="text-burnt-orange text-5xl leading-none align-text-top">"</span>
           </blockquote>
 
           <p className="font-body text-light-warm-gray text-lg mt-10">
@@ -877,31 +869,31 @@ export default function Landing() {
       </section>
 
       {/* ===== FINAL CTA ===== */}
-      <section className="py-20 md:py-32 px-6 bg-sky-blue relative overflow-hidden">
+      <section className="py-20 md:py-32 px-6 bg-magenta/20 retro-bg relative overflow-hidden">
         <div className="relative z-10 max-w-2xl mx-auto text-center">
           <h2 className="font-display text-4xl md:text-6xl text-charcoal mb-4">
             Ready to Make Your Move?
           </h2>
-          <p className="font-body text-charcoal/70 mb-8 max-w-md mx-auto">
+          <p className="font-body text-warm-gray mb-8 max-w-md mx-auto">
             Start a league, submit your Moves, draft your season, and see who actually follows through.
           </p>
 
           <Link to="/signup">
-            <Button size="lg" variant="primary" className="text-lg px-12 py-4 shadow-xl">
+            <Button size="lg" variant="primary" className="text-lg px-12 py-4 shadow-xl shadow-burnt-orange/20">
               Start a Season
             </Button>
           </Link>
 
-          <p className="font-body text-charcoal/60 mt-6 text-sm">
+          <p className="font-body text-warm-gray mt-6 text-sm">
             Free to play. Takes 2 minutes to set up.
           </p>
         </div>
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="py-10 px-6 bg-charcoal border-t-4 border-sky-blue">
+      <footer className="py-10 px-6 bg-charcoal border-t-4 border-burnt-orange">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <span className="text-2xl text-sky-blue" style={{ fontFamily: 'var(--font-logo)' }}>MOVES</span>
+          <span className="text-2xl text-burnt-orange" style={{ fontFamily: 'var(--font-logo)' }}>MOVES</span>
 
           <div className="flex items-center gap-6">
             <Link

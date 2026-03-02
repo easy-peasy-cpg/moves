@@ -1,35 +1,35 @@
 @import "tailwindcss";
 
 @theme {
-  --color-sky-blue: #81D8D0;
-  --color-sunset-gold: #D99E82;
-  --color-burnt-orange: #C07A58;
-  --color-magenta: #AE82D9;
-  --color-sage-green: #D7D982;
-  --color-deep-purple: #8B5CB8;
-  --color-cream: #F5F3EE;
+  --color-sky-blue: #7BC8E8;
+  --color-sunset-gold: #F0A878;
+  --color-burnt-orange: #E8788A;
+  --color-magenta: #B88AD8;
+  --color-sage-green: #A8D8A0;
+  --color-deep-purple: #8B6AB8;
+  --color-cream: #F8EDF0;
   --color-warm-white: #FFFFFF;
-  --color-charcoal: #1A1A1A;
-  --color-warm-gray: #6B6B6B;
-  --color-light-warm-gray: #E0E0DC;
+  --color-charcoal: #2D2040;
+  --color-warm-gray: #6B5B78;
+  --color-light-warm-gray: #E8D8E0;
 
   --font-logo: "Alfa Slab One", serif;
-  --font-display: "Bebas Neue", sans-serif;
-  --font-body: "Source Serif 4", serif;
+  --font-display: "Lilita One", sans-serif;
+  --font-body: "DM Sans", sans-serif;
 }
 
 :root {
-  --sky-blue: #81D8D0;
-  --sunset-gold: #D99E82;
-  --burnt-orange: #C07A58;
-  --magenta: #AE82D9;
-  --sage-green: #D7D982;
-  --deep-purple: #8B5CB8;
-  --cream: #F5F3EE;
+  --sky-blue: #7BC8E8;
+  --sunset-gold: #F0A878;
+  --burnt-orange: #E8788A;
+  --magenta: #B88AD8;
+  --sage-green: #A8D8A0;
+  --deep-purple: #8B6AB8;
+  --cream: #F8EDF0;
   --warm-white: #FFFFFF;
-  --charcoal: #1A1A1A;
-  --warm-gray: #6B6B6B;
-  --light-warm-gray: #E0E0DC;
+  --charcoal: #2D2040;
+  --warm-gray: #6B5B78;
+  --light-warm-gray: #E8D8E0;
 }
 
 * {
@@ -37,13 +37,12 @@
 }
 
 .font-display {
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
 }
 
 body {
   margin: 0;
-  font-family: "Source Serif 4", serif;
+  font-family: "DM Sans", sans-serif;
   background-color: var(--cream);
   color: var(--charcoal);
   -webkit-font-smoothing: antialiased;
@@ -51,16 +50,16 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Bebas Neue", sans-serif;
+  font-family: "Lilita One", sans-serif;
   color: var(--charcoal);
 }
 
 .font-display {
-  font-family: "Bebas Neue", sans-serif;
+  font-family: "Lilita One", sans-serif;
 }
 
 .font-body {
-  font-family: "Source Serif 4", serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 @keyframes fadeUp {
@@ -120,6 +119,16 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: none;
 }
 
+.retro-bg {
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent,
+    transparent 10px,
+    rgba(139, 106, 184, 0.04) 10px,
+    rgba(139, 106, 184, 0.04) 20px
+  );
+}
+
 .category-physical { background-color: var(--sage-green); color: var(--charcoal); }
 .category-personal { background-color: var(--sunset-gold); color: var(--charcoal); }
 .category-professional { background-color: var(--sky-blue); color: var(--charcoal); }
@@ -127,8 +136,8 @@ h1, h2, h3, h4, h5, h6 {
 .category-creative { background-color: var(--deep-purple); color: white; }
 .category-adventure { background-color: var(--burnt-orange); color: white; }
 .category-wildcard {
-  background: linear-gradient(135deg, var(--sunset-gold), var(--burnt-orange));
-  color: var(--charcoal);
+  background: linear-gradient(135deg, var(--magenta), var(--burnt-orange));
+  color: white;
 }
 
 .progress-bar {
