@@ -130,6 +130,264 @@ const steps = [
   },
 ];
 
+// ===== DASHBOARD DEMO DATA =====
+const dashboardPlayers = [
+  {
+    name: 'Alex', initial: 'A', color: 'bg-burnt-orange',
+    completed: 7,
+    moves: [
+      { title: 'Run a Half Marathon', category: 'physical', done: true },
+      { title: 'Host a Dinner Party', category: 'social', done: true, collab: 'Jordan' },
+      { title: 'Go Skydiving', category: 'adventure', done: false },
+      { title: 'Read 5 Books', category: 'personal', done: true },
+      { title: 'Build a Side Project', category: 'professional', done: true },
+      { title: 'Group Camping Trip', category: 'adventure', done: true, collab: 'Everyone' },
+      { title: 'Write a Short Film', category: 'creative', done: false },
+      { title: 'Digital Detox Weekend', category: 'personal', done: true },
+      { title: 'Sunrise Hike', category: 'physical', done: true },
+      { title: 'Say Yes to Everything for a Day', category: 'wildcard', done: false },
+    ],
+  },
+  {
+    name: 'Jordan', initial: 'J', color: 'bg-sunset-gold',
+    completed: 5,
+    moves: [
+      { title: 'Learn Piano', category: 'creative', done: true },
+      { title: 'Host a Dinner Party', category: 'social', done: true, collab: 'Alex' },
+      { title: 'Cold Plunge Challenge', category: 'physical', done: false },
+      { title: 'Give a Public Talk', category: 'professional', done: true },
+      { title: 'Group Camping Trip', category: 'adventure', done: true, collab: 'Everyone' },
+      { title: 'Karaoke Night', category: 'wildcard', done: true },
+      { title: 'Train for a Triathlon', category: 'physical', done: false },
+      { title: 'Journal for 30 Days', category: 'personal', done: false },
+      { title: 'Mentor Someone Junior', category: 'professional', done: false },
+      { title: 'Visit a New City Solo', category: 'adventure', done: false },
+    ],
+  },
+  {
+    name: 'Sam', initial: 'S', color: 'bg-magenta',
+    completed: 6,
+    moves: [
+      { title: 'Swim in the Ocean', category: 'physical', done: true },
+      { title: 'Paint a Self-Portrait', category: 'creative', done: true },
+      { title: 'Reconnect with an Old Friend', category: 'social', done: true, collab: 'Riley' },
+      { title: 'Take an Online Course', category: 'professional', done: false },
+      { title: 'Group Camping Trip', category: 'adventure', done: true, collab: 'Everyone' },
+      { title: 'Try Rock Climbing', category: 'physical', done: true },
+      { title: 'Cook a 5-Course Meal', category: 'personal', done: false },
+      { title: 'Random Act of Kindness Spree', category: 'wildcard', done: true },
+      { title: 'Learn to Surf', category: 'adventure', done: false },
+      { title: 'Meditate Every Day for a Week', category: 'personal', done: false },
+    ],
+  },
+  {
+    name: 'Riley', initial: 'R', color: 'bg-sage-green',
+    completed: 4,
+    moves: [
+      { title: 'Do a 5K', category: 'physical', done: true },
+      { title: 'Write a Song', category: 'creative', done: false },
+      { title: 'Reconnect with an Old Friend', category: 'social', done: true, collab: 'Sam' },
+      { title: 'Start a Blog', category: 'professional', done: false },
+      { title: 'Group Camping Trip', category: 'adventure', done: true, collab: 'Everyone' },
+      { title: 'No Phone for 48 Hours', category: 'wildcard', done: false },
+      { title: 'Try Thai Cooking Class', category: 'personal', done: true },
+      { title: 'Volunteer at a Shelter', category: 'social', done: false },
+      { title: 'Kayak a River', category: 'adventure', done: false },
+      { title: 'Read 3 Books in a Month', category: 'personal', done: false },
+    ],
+  },
+  {
+    name: 'Morgan', initial: 'M', color: 'bg-deep-purple',
+    completed: 8,
+    moves: [
+      { title: 'Train for a Spartan Race', category: 'physical', done: true },
+      { title: 'Make a Short Film', category: 'creative', done: true },
+      { title: 'Game Night Marathon', category: 'social', done: true, collab: 'Alex' },
+      { title: 'Give a Talk at a Meetup', category: 'professional', done: true },
+      { title: 'Group Camping Trip', category: 'adventure', done: true, collab: 'Everyone' },
+      { title: 'Sing Karaoke Sober', category: 'wildcard', done: true },
+      { title: 'Learn Pottery', category: 'creative', done: true },
+      { title: 'Camp Under the Stars', category: 'adventure', done: true },
+      { title: 'Journal Every Day for a Month', category: 'personal', done: false },
+      { title: 'Organize a Fundraiser', category: 'social', done: false },
+    ],
+  },
+];
+
+function DashboardDemo() {
+  const [activePlayer, setActivePlayer] = useState(null);
+  const sorted = [...dashboardPlayers].sort((a, b) => b.completed - a.completed);
+
+  return (
+    <section className="py-20 md:py-32 px-6 bg-charcoal">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="font-display text-3xl md:text-5xl text-warm-white text-center mb-4">
+          Inside a Season
+        </h2>
+        <p className="font-body text-light-warm-gray text-center mb-12 max-w-lg mx-auto">
+          Here's what it looks like mid-season. Five friends, ten Moves each, all competing to finish the most.
+        </p>
+
+        {/* Season Header */}
+        <div className="bg-warm-white rounded-2xl border-2 border-light-warm-gray p-5 md:p-6 mb-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div>
+              <h3 className="font-display text-2xl md:text-3xl text-charcoal">Summer 2026</h3>
+              <p className="font-body text-sm text-warm-gray">Jun 1 — Aug 31 &middot; 47 days left</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="flex -space-x-2">
+                {dashboardPlayers.map((p) => (
+                  <div key={p.name} className={`w-8 h-8 rounded-full ${p.color} text-white flex items-center justify-center text-xs font-bold border-2 border-warm-white`}>
+                    {p.initial}
+                  </div>
+                ))}
+              </div>
+              <span className="font-body text-xs text-warm-gray font-semibold bg-sky-blue/20 text-charcoal px-2.5 py-1 rounded-full">5 players</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Scoreboard */}
+        <div className="bg-warm-white rounded-2xl border-2 border-light-warm-gray p-5 md:p-6 mb-6">
+          <h3 className="font-display text-lg text-charcoal mb-4">Scoreboard</h3>
+          <div className="space-y-3">
+            {sorted.map((player, i) => {
+              const pct = (player.completed / 10) * 100;
+              const rankColors = ['text-sunset-gold', 'text-warm-gray', 'text-burnt-orange', 'text-warm-gray', 'text-warm-gray'];
+              return (
+                <button
+                  key={player.name}
+                  onClick={() => setActivePlayer(activePlayer === player.name ? null : player.name)}
+                  className="w-full flex items-center gap-3 group cursor-pointer hover:bg-cream/60 rounded-xl px-2 py-1.5 -mx-2 transition-colors"
+                >
+                  <span className={`font-display text-lg w-5 text-center ${rankColors[i]}`}>{i + 1}</span>
+                  <div className={`w-8 h-8 rounded-full ${player.color} text-white flex items-center justify-center text-xs font-bold shrink-0`}>
+                    {player.initial}
+                  </div>
+                  <span className="font-body text-sm font-semibold text-charcoal w-16 text-left">{player.name}</span>
+                  <div className="flex-1 h-2.5 rounded-full bg-light-warm-gray overflow-hidden">
+                    <div
+                      className="h-full rounded-full bg-sky-blue transition-all duration-700"
+                      style={{ width: `${pct}%` }}
+                    />
+                  </div>
+                  <span className="font-body text-xs text-warm-gray font-semibold w-10 text-right">{player.completed}/10</span>
+                  <svg className={`w-4 h-4 text-warm-gray transition-transform ${activePlayer === player.name ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Expanded Player Roster */}
+        {activePlayer && (() => {
+          const player = dashboardPlayers.find((p) => p.name === activePlayer);
+          if (!player) return null;
+          return (
+            <div className="bg-warm-white rounded-2xl border-2 border-light-warm-gray p-5 md:p-6 mb-6 animate-fade-up">
+              <div className="flex items-center gap-3 mb-5">
+                <div className={`w-10 h-10 rounded-full ${player.color} text-white flex items-center justify-center font-display text-sm font-bold`}>
+                  {player.initial}
+                </div>
+                <div>
+                  <h3 className="font-display text-xl text-charcoal">{player.name}'s Moves</h3>
+                  <p className="font-body text-xs text-warm-gray">{player.completed}/10 completed</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {player.moves.map((move) => (
+                  <div
+                    key={move.title}
+                    className={`flex items-center gap-3 rounded-xl border px-3.5 py-2.5 transition-all ${
+                      move.done
+                        ? 'border-sage-green/30 bg-sage-green/5'
+                        : 'border-light-warm-gray bg-warm-white'
+                    }`}
+                  >
+                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                      move.done ? 'border-sage-green bg-sage-green' : 'border-light-warm-gray'
+                    }`}>
+                      {move.done && (
+                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                      )}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <CategoryPill category={move.category} size="sm" />
+                        {move.collab && (
+                          <span className="text-[10px] font-body font-semibold bg-sunset-gold/20 text-sunset-gold px-1.5 py-0.5 rounded-full">
+                            Collab{move.collab !== 'Everyone' ? ` w/ ${move.collab}` : ' — Everyone'}
+                          </span>
+                        )}
+                      </div>
+                      <p className={`font-body text-sm mt-0.5 leading-snug ${move.done ? 'text-warm-gray line-through' : 'text-charcoal font-semibold'}`}>
+                        {move.title}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
+
+        {/* All Rosters Grid (Desktop) */}
+        {!activePlayer && (
+          <div className="hidden md:grid grid-cols-5 gap-3 animate-fade-up">
+            {sorted.map((player) => (
+              <div key={player.name} className="bg-warm-white rounded-2xl border-2 border-light-warm-gray p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className={`w-7 h-7 rounded-full ${player.color} text-white flex items-center justify-center text-[10px] font-bold`}>
+                    {player.initial}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="font-body text-xs font-semibold text-charcoal truncate">{player.name}</p>
+                    <p className="font-body text-[10px] text-warm-gray">{player.completed}/10</p>
+                  </div>
+                </div>
+                <div className="space-y-1.5">
+                  {player.moves.map((move) => (
+                    <div key={move.title} className="flex items-start gap-1.5">
+                      <div className={`w-3.5 h-3.5 mt-0.5 rounded-full border flex items-center justify-center shrink-0 ${
+                        move.done ? 'border-sage-green bg-sage-green' : 'border-light-warm-gray'
+                      }`}>
+                        {move.done && (
+                          <svg className="w-2 h-2 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        )}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-1">
+                          <CategoryPill category={move.category} size="sm" className="!text-[8px] !px-1.5 !py-0" />
+                          {move.collab && (
+                            <span className="text-[7px] font-body font-semibold bg-sunset-gold/20 text-sunset-gold px-1 py-0 rounded-full whitespace-nowrap">
+                              {move.collab === 'Everyone' ? 'ALL' : `w/ ${move.collab}`}
+                            </span>
+                          )}
+                        </div>
+                        <p className={`font-body text-[11px] leading-tight mt-0.5 ${
+                          move.done ? 'text-warm-gray line-through' : 'text-charcoal'
+                        }`}>
+                          {move.title}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Tap to explore hint */}
+        <p className="font-body text-xs text-light-warm-gray text-center mt-6">
+          Tap any player on the scoreboard to see their full roster
+        </p>
+      </div>
+    </section>
+  );
+}
+
 // ===== DRAFT DEMO DATA =====
 const demoPlayers = [
   { name: 'Alex', color: 'bg-sky-blue', initial: 'A' },
@@ -516,6 +774,9 @@ export default function Landing() {
 
       {/* ===== DRAFT DEMO ===== */}
       <DraftDemo />
+
+      {/* ===== DASHBOARD DEMO ===== */}
+      <DashboardDemo />
 
       {/* ===== CATEGORIES ===== */}
       <section className="py-20 md:py-32 px-6 bg-sky-blue">
