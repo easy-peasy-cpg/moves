@@ -3,13 +3,57 @@ import { Link } from 'react-router-dom';
 import Button from '../components/ui/Button';
 import CategoryPill from '../components/ui/CategoryPill';
 
-const stickerEmojis = [
-  { emoji: '🔥', top: '12%', left: '6%', rotation: -12, delay: 0, size: 'text-4xl md:text-5xl' },
-  { emoji: '💯', top: '22%', right: '7%', rotation: 8, delay: 1.5, size: 'text-3xl md:text-4xl' },
-  { emoji: '🏆', top: '50%', left: '4%', rotation: -5, delay: 0.8, size: 'text-3xl md:text-5xl' },
-  { emoji: '⚡', top: '55%', right: '5%', rotation: 15, delay: 2.0, size: 'text-4xl md:text-5xl' },
-  { emoji: '🎯', top: '35%', left: '9%', rotation: -8, delay: 2.5, size: 'text-3xl md:text-4xl' },
-  { emoji: '🤘', top: '42%', right: '10%', rotation: 10, delay: 0.4, size: 'text-3xl md:text-4xl' },
+// Floating SVG icon components for hero background
+function IconStar() {
+  return (
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  );
+}
+function IconBolt() {
+  return (
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+    </svg>
+  );
+}
+function IconTarget() {
+  return (
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" />
+    </svg>
+  );
+}
+function IconMountain() {
+  return (
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M8 3l4 8 5-5 5 15H2L8 3z" />
+    </svg>
+  );
+}
+function IconFlag() {
+  return (
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" /><line x1="4" y1="22" x2="4" y2="15" />
+    </svg>
+  );
+}
+function IconCompass() {
+  return (
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" /><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+    </svg>
+  );
+}
+
+const floatingIcons = [
+  { Icon: IconStar, top: '12%', left: '6%', rotation: -12, delay: 0 },
+  { Icon: IconBolt, top: '22%', right: '7%', rotation: 8, delay: 1.5 },
+  { Icon: IconMountain, top: '50%', left: '4%', rotation: -5, delay: 0.8 },
+  { Icon: IconCompass, top: '55%', right: '5%', rotation: 15, delay: 2.0 },
+  { Icon: IconTarget, top: '35%', left: '9%', rotation: -8, delay: 2.5 },
+  { Icon: IconFlag, top: '42%', right: '10%', rotation: 10, delay: 0.4 },
 ];
 
 const categories = [
@@ -43,21 +87,20 @@ const categories = [
   },
 ];
 
-function FloatingSticker({ emoji, rotation, top, left, right, delay, size }) {
+function FloatingIcon({ Icon, rotation, top, left, right, delay }) {
   return (
     <div
-      className="absolute hidden md:block pointer-events-none select-none"
+      className="absolute hidden md:block pointer-events-none select-none text-charcoal/15"
       style={{ top, left, right }}
     >
       <div
-        className={`${size} opacity-20`}
         style={{
           animation: 'float 6s ease-in-out infinite',
           animationDelay: `${delay}s`,
           transform: `rotate(${rotation}deg)`,
         }}
       >
-        {emoji}
+        <Icon />
       </div>
     </div>
   );
@@ -697,9 +740,9 @@ export default function Landing() {
 
       {/* ===== HERO ===== */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-sky-blue">
-        {/* Floating stickers */}
-        {stickerEmojis.map((s) => (
-          <FloatingSticker key={s.emoji} {...s} />
+        {/* Floating icons */}
+        {floatingIcons.map((s, i) => (
+          <FloatingIcon key={i} {...s} />
         ))}
 
         {/* Hero content */}
@@ -821,7 +864,6 @@ export default function Landing() {
       {/* ===== SOCIAL PROOF / ENERGY ===== */}
       <section className="py-20 md:py-32 px-6 bg-charcoal relative overflow-hidden">
         <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <span className="text-5xl mb-6 inline-block">🎤</span>
           <blockquote className="font-display text-2xl md:text-4xl text-warm-white leading-snug">
             <span className="text-sky-blue text-5xl leading-none align-text-top">"</span>
             We kept saying we'd do stuff together. Now we actually do it. The draft makes it real.
