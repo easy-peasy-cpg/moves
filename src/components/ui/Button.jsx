@@ -9,7 +9,7 @@ const variants = {
     'bg-burnt-orange text-white hover:scale-[1.02] hover:shadow-lg active:scale-[0.98]',
   ghost:
     'bg-transparent text-charcoal hover:bg-charcoal/5',
-  yellow:
+  accent:
     'bg-sky-blue text-charcoal hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] font-bold',
 };
 

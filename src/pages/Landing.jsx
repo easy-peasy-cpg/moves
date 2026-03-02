@@ -133,7 +133,7 @@ const steps = [
 // ===== DASHBOARD DEMO DATA =====
 const dashboardPlayers = [
   {
-    name: 'Alex', initial: 'A', color: 'bg-burnt-orange',
+    name: 'Alex', initial: 'A', color: 'bg-sky-blue',
     completed: 7,
     moves: [
       { title: 'Run a Half Marathon', category: 'physical', done: true },
@@ -392,7 +392,7 @@ function DashboardDemo() {
 const demoPlayers = [
   { name: 'Alex', color: 'bg-sky-blue', initial: 'A' },
   { name: 'Jordan', color: 'bg-sunset-gold', initial: 'J' },
-  { name: 'Sam', color: 'bg-magenta', initial: 'S' },
+  { name: 'Sam', color: 'bg-deep-purple', initial: 'S' },
 ];
 
 const demoPool = [
