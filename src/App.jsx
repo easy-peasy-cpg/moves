@@ -27,7 +27,7 @@ function ProtectedRoute({ children }) {
     return (
       <div className="min-h-screen bg-cream flex items-center justify-center">
         <div className="text-center">
-          <h1 className="font-display text-4xl text-sky-blue font-bold animate-pulse-slow">Moves</h1>
+          <h1 className="text-4xl text-sky-blue animate-pulse-slow" style={{ fontFamily: 'var(--font-logo)' }}>MOVES</h1>
           <p className="text-warm-gray mt-2">Loading...</p>
         </div>
       </div>
@@ -63,7 +63,7 @@ export default function App() {
     return (
       <div className="min-h-screen bg-cream flex items-center justify-center">
         <div className="text-center">
-          <h1 className="font-display text-4xl text-sky-blue font-bold animate-pulse-slow">Moves</h1>
+          <h1 className="text-4xl text-sky-blue animate-pulse-slow" style={{ fontFamily: 'var(--font-logo)' }}>MOVES</h1>
         </div>
       </div>
     )

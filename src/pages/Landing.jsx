@@ -108,15 +108,15 @@ const steps = [
     number: '1',
     title: 'Build the Pool',
     description:
-      'Everyone in your group suggests real-life challenges and goals — hike a mountain, throw a dinner party, learn to surf, read 5 books. These all go into a shared pool.',
+      'Start a league with your crew. Each person secretly submits 10 Moves — real-life challenges like "run a 5K" or "host a dinner party." Nobody sees what anyone else added. All the Moves go into one shared pool.',
     color: 'text-sunset-gold',
     Icon: PoolIcon,
   },
   {
     number: '2',
-    title: 'Draft Your Moves',
+    title: 'Snake Draft',
     description:
-      'Take turns picking from the pool, like a fantasy draft. You choose the challenges you actually want to commit to. Grab the fun ones early or lock in the hard ones — strategy is up to you.',
+      'Just like fantasy football, you take turns picking Moves from the pool. The draft order snakes each round so it stays fair. Grab the ones you actually want to do — or steal the ones you know your friends want.',
     color: 'text-sky-blue',
     Icon: DraftIcon,
   },
@@ -124,7 +124,7 @@ const steps = [
     number: '3',
     title: 'Go Do Them',
     description:
-      'You have a full season to complete your Moves. Post a photo when you finish one. Nudge friends who are slacking. See who completes the most by the end.',
+      'You have a full season to complete your Moves. Snap a photo when you finish one. Nudge friends who are slacking. Talk trash in the feed. Whoever completes the most wins.',
     color: 'text-sage-green',
     Icon: CelebrateIcon,
   },
@@ -220,7 +220,7 @@ function DraftDemo() {
           Watch a Draft Happen
         </h2>
         <p className="font-body text-warm-gray text-center mb-12 max-w-lg mx-auto">
-          Three friends take turns picking Moves from a shared pool. Click any Move to draft it yourself, or sit back and watch the auto-draft play out.
+          Everyone submitted their Moves blind — now the pool is revealed. Three friends take turns picking. Click any Move to draft it yourself, or watch the auto-draft play out.
         </p>
 
         {/* On the Clock Banner */}
@@ -446,7 +446,7 @@ export default function Landing() {
 
         {/* Hero content */}
         <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
-          <h1 className="font-display text-7xl md:text-[10rem] font-extrabold text-charcoal leading-none animate-fade-in-up tracking-tight">
+          <h1 className="text-7xl md:text-[10rem] text-charcoal leading-none animate-fade-in-up" style={{ fontFamily: 'var(--font-logo)' }}>
             MOVES
           </h1>
 
@@ -455,7 +455,7 @@ export default function Landing() {
           </p>
 
           <p className="font-body text-lg text-charcoal/70 max-w-xl mx-auto mt-4 animate-fade-in-up-delay-2">
-            A Move is anything you want to do — run a 5K, host a dinner party, go skydiving, learn guitar. You and your friends draft Moves, then you have a season to actually do them.
+            Get your friends together. Everyone secretly submits real-life challenges. Then you snake draft to claim the ones you'll actually do. Think fantasy football, but instead of watching players — you are the player.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10 animate-fade-in-up-delay-3">
@@ -509,7 +509,7 @@ export default function Landing() {
             So What's a "Move"?
           </h2>
           <p className="font-body text-lg text-warm-gray leading-relaxed max-w-2xl mx-auto">
-            A Move is something you want to do in real life — big or small. Run a half marathon. Try karaoke. Camp under the stars. Volunteer somewhere new. Your group comes up with the Moves, and you draft the ones you're going to commit to. No more "we should totally do that someday." You drafted it. Now go do it.
+            A Move is a real-life challenge — run a half marathon, try karaoke, camp under the stars, learn to cook Thai food. Your league of 3-8 friends each secretly submits 10 Moves to the pool. Nobody sees what anyone else submitted. Then you hold a live snake draft — just like fantasy football — where you take turns claiming Moves from the pool. You've got a full season to complete them, post photo proof, and see who finishes the most. No more "we should totally do that someday." You drafted it. Now go do it.
           </p>
         </div>
       </section>
@@ -580,7 +580,7 @@ export default function Landing() {
             Ready to Make Your Move?
           </h2>
           <p className="font-body text-charcoal/70 mb-8 max-w-md mx-auto">
-            Grab your crew, build a pool of challenges, draft your Moves, and see who actually follows through.
+            Start a league, submit your Moves, draft your season, and see who actually follows through.
           </p>
 
           <Link to="/signup">
@@ -598,7 +598,7 @@ export default function Landing() {
       {/* ===== FOOTER ===== */}
       <footer className="py-10 px-6 bg-charcoal border-t-4 border-sky-blue">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <span className="font-display text-2xl font-bold text-sky-blue">MOVES</span>
+          <span className="text-2xl text-sky-blue" style={{ fontFamily: 'var(--font-logo)' }}>MOVES</span>
 
           <div className="flex items-center gap-6">
             <Link

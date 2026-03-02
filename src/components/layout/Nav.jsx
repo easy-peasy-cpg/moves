@@ -37,8 +37,8 @@ export default function Nav() {
   return (
     <nav className="hidden md:flex fixed top-0 left-0 right-0 z-40 bg-warm-white/80 backdrop-blur-md border-b border-light-warm-gray items-center justify-between px-6 h-16">
       {/* Left: Wordmark */}
-      <Link to="/" className="font-display text-2xl font-bold text-sky-blue">
-        Moves
+      <Link to="/" className="text-2xl text-sky-blue" style={{ fontFamily: 'var(--font-logo)' }}>
+        MOVES
       </Link>
 
       {/* Middle: My Seasons dropdown */}
